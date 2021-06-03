@@ -17,7 +17,7 @@ Future getImage(BuildContext context, Function cb) async {
             title: Text('Photo'),
             onTap: () async {
               Navigator.pop(context);
-              var image = ImagePicker().getImage(source: ImageSource.gallery);
+              var image = await ImagePicker().getImage(source: ImageSource.gallery);
               cb(image);
             },
           ),
@@ -26,7 +26,7 @@ Future getImage(BuildContext context, Function cb) async {
             title: Text('Camera'),
             onTap: () async {
               Navigator.pop(context);
-              var image = ImagePicker().getImage(source: ImageSource.camera);
+              var image = await ImagePicker().getImage(source: ImageSource.camera);
               cb(image);
             },
           ),
