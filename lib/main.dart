@@ -37,7 +37,7 @@ class _AppState extends State<App> {
     final textTheme = GoogleFonts.assistantTextTheme(
       TextTheme(
         headline3: TextStyle(
-          fontSize: 36,
+          fontSize: 28,
           color: Colors.black,
           fontWeight: FontWeight.w600,
           letterSpacing: 2.08,

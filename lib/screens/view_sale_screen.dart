@@ -1,22 +1,22 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app/models/item.dart';
-import 'package:flutter_app/shared/views/view_item_view.dart';
+import 'package:flutter_app/models/sale.dart';
+import 'package:flutter_app/shared/items_list_view.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class ViewItemScreen extends StatefulWidget {
+class ViewSaleScreen extends StatefulWidget {
   String id;
-  Item item;
+  Sale sale;
 
-  ViewItemScreen(this.id, {required this.item});
-  ViewItemScreen.item(Item fullItem)
-      : this.id = fullItem.id,
-        this.item = fullItem;
+  ViewSaleScreen(this.id, {required this.sale});
+  ViewSaleScreen.sale(Sale fullSale)
+      : this.id = fullSale.id,
+        this.sale = fullSale;
 
   @override
-  _ViewItemScreenState createState() => _ViewItemScreenState();
+  _ViewSaleScreenState createState() => _ViewSaleScreenState();
 }
 
-class _ViewItemScreenState extends State<ViewItemScreen> {
+class _ViewSaleScreenState extends State<ViewSaleScreen> {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
@@ -30,7 +30,7 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
       ),
       backgroundColor: const Color(0xfffffbf4),
       body: SafeArea(
-        child: ViewItemView(widget.item),
+        child: ItemsListView(),
       ),
     );
   }
