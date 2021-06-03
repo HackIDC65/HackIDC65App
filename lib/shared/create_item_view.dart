@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
 import 'package:flutter_app/models/sale.dart';
@@ -44,6 +45,8 @@ class _CreateItemViewState extends State<CreateItemView> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -150,8 +153,31 @@ class _CreateItemViewState extends State<CreateItemView> {
                     ? AppLocalizations.of(context)?.saveItem
                     : AppLocalizations.of(context)?.createItem) ??
                 "",
-            onPressed: () {
-              
+            onPressed: () async {
+              CollectionReference items =
+                  FirebaseFirestore.instance.collection('items');
+              var id = widget.item?.id;
+              if (id != null) {
+                await items.doc(id).set({
+                  title: this.title,
+                  price: this.price,
+                  desc: this.desc,
+                  address: this.address,
+                  count: this.count,
+                  pickupTime: this.pickupTime,
+                });
+              } else {
+                await items.add({
+                  title: this.title,
+                  price: this.price,
+                  desc: this.desc,
+                  address: this.address,
+                  count: this.count,
+                  pickupTime: this.pickupTime,
+                });
+              }
+
+              return Navigator.of(context).pop();
             },
           ),
           SizedBox(height: 24),
