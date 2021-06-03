@@ -70,11 +70,11 @@ class ItemCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    child: Text(item.title,
+                    child: Text(item.title ?? 'no title',
                         style: Theme.of(context).textTheme.headline4),
                   ),
                   Container(
-                    child: Text(item.desc,
+                    child: Text(item.desc ?? '',
                         style: Theme.of(context).textTheme.bodyText1),
                   ),
                 ],

@@ -407,5 +407,40 @@
     "placeholders": {
       "number": {"type": "String"}
     }
+  },
+  "itemPriceHint": "Price",
+  "@itemPriceHint": {
+    "description": "",
+    "type": "text"
+  },
+  "itemTitleHint": "Title",
+  "@itemTitleHint": {
+    "description": "",
+    "type": "text"
+  },
+  "itemDescriptionHint": "Description",
+  "@itemDescriptionHint": {
+    "description": "",
+    "type": "text"
+  },
+  "itemAddressHint": "Address",
+  "@itemAddressHint": {
+    "description": "",
+    "type": "text"
+  },
+  "itemCountHint": "Count",
+  "@itemCountHint": {
+    "description": "",
+    "type": "text"
+  },
+  "createItem": "Create",
+  "@createItem": {
+    "description": "",
+    "type": "text"
+  },
+  "saveItem": "Save",
+  "@saveItem": {
+    "description": "",
+    "type": "text"
   }
 }
