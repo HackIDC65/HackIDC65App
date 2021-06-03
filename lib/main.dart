@@ -66,12 +66,12 @@ class _AppState extends State<App> {
       ),
     );
     final materialTheme = new ThemeData(
-      primaryColor: Colors.black,
+      primaryColor: Color(0xff333333),
       textTheme: textTheme,
     );
     final materialDarkTheme = new ThemeData(
       brightness: Brightness.dark,
-      primaryColor: Colors.black,
+      primaryColor: Color(0xff333333),
       textTheme: textTheme,
     );
 
@@ -81,7 +81,7 @@ class _AppState extends State<App> {
         color: Colors.white,
         darkColor: Colors.yellow,
       ),
-      barBackgroundColor: Colors.black,
+      barBackgroundColor: Color(0xff333333),
       textTheme: CupertinoTextThemeData(primaryColor: Colors.white),
     );
 
