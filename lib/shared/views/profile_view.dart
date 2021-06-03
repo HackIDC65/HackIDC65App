@@ -69,6 +69,13 @@ class _ProfileViewState extends State<ProfileView> {
                     Icons.phone,
                   ),
                 ),
+                ListTile(
+                  title: Text("israel@israeli.com",
+                      style: TextStyle(fontWeight: FontWeight.w500)),
+                  leading: Icon(
+                    Icons.email,
+                  ),
+                ),
               ],
             ),
           ),
@@ -77,9 +84,4 @@ class _ProfileViewState extends State<ProfileView> {
     );
   }
 
-// Widget _buildField(BuildContext context) {
-//   return PlatformTextField(
-//     controller: ,
-//   )
-// }
 }

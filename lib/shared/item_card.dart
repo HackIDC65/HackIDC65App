@@ -66,22 +66,40 @@ class ItemCard extends StatelessWidget {
             ])),
             Container(
               margin: EdgeInsets.fromLTRB(12, 10, 12, 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    child: Text(item.title,
-                        style: Theme.of(context).textTheme.headline4),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Text(item.title,
+                            style: Theme.of(context).textTheme.headline4),
+                      ),
+                      Container(
+                        child: Text(
+                          item.desc,
+                          style: Theme.of(context).textTheme.bodyText1,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                        ),
+                        width: 400,
+                      ),
+                    ],
                   ),
                   Container(
-                    child: Text(
-                      item.desc,
-                      style: Theme.of(context).textTheme.bodyText1,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      softWrap: false,
-                    ),
-                    width: 400,
+                      alignment: Alignment.topRight,
+                      child: PopupMenuButton(
+                        itemBuilder: (BuildContext context) {
+                          return {'Edit', 'Delete'}.map((String choice) {
+                            return PopupMenuItem<String>(
+                              value: choice,
+                              child: Text(choice),
+                            );
+                          }).toList();
+                        },
+                      )
                   ),
                 ],
               ),
