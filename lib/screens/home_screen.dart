@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/shared/items_list_view.dart';
-import 'package:flutter_app/screens/login_screen.dart';
-import 'package:flutter_app/shared/create_item_view.dart';
+import 'package:flutter_app/shared/profile_view.dart';
 import 'package:flutter_app/utils/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-
-import 'create_item_screen.dart';
+import 'package:flutter_app/shared/create_item_view.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -23,20 +21,13 @@ class _HomeScreenState extends State<HomeScreen> {
         cupertino: (_, __) =>
             CupertinoNavigationBarData(transitionBetweenRoutes: false),
         title: Text("HackIDC65"),
-        trailingActions: <Widget>[
-          PlatformIconButton(
-            padding: EdgeInsets.zero,
-            icon: Icon(context.platformIcons.search),
-            onPressed: () {
-              Navigator.of(context).push(platformPageRoute(
-                context: context,
-                builder: (BuildContext context) {
-                  return CreateItemScreen();
-                },
-              ));
-            },
-          ),
-        ],
+        // trailingActions: <Widget>[
+        //   PlatformIconButton(
+        //     padding: EdgeInsets.zero,
+        //     icon: Icon(context.platformIcons.search),
+        //     onPressed: _openFiltersScreen,
+        //   ),
+        // ],
       ),
       backgroundColor: const Color(0xfffffbf4),
       body: SafeArea(child: _buildPage(_selectedIndex)),
@@ -47,12 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildPage(int index) {
     switch (index) {
       case 0:
-        return Center(child: ItemsListView());
+        return ItemsListView();
       case 3:
-        return Center(child: Text("hello 2"));
+        return ProfileView();
       default:
         return const Center(
-          child: Text("בקרוב"),
+          child: Text("Coming Soon"),
         );
     }
   }
