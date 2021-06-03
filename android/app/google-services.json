@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "612761751783",
-    "project_id": "questburger-285709",
-    "storage_bucket": "questburger-285709.appspot.com"
+    "project_number": "57885613307",
+    "project_id": "hackidc-65-2021",
+    "storage_bucket": "hackidc-65-2021.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:612761751783:android:98528fc72a0ea4177c9242",
+        "mobilesdk_app_id": "1:57885613307:android:da2cf96a61304d7b48e45e",
         "android_client_info": {
-          "package_name": "com.questburger.flutter_app"
+          "package_name": "com.hackidc65.flutter"
         }
       },
       "oauth_client": [
         {
-          "client_id": "612761751783-0ogrlsm9pfohhkc89mbiub9qdj3ulnuq.apps.googleusercontent.com",
+          "client_id": "57885613307-1up2gr6c04fa6l4d28140adv8vb87jdu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD1omH6YkfGJCoZ_hozbAP6GfeEqnZjT-k"
+          "current_key": "AIzaSyDo-mCtdc48SvXGzTpAFGjuIjzgmjOyecE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "612761751783-0ogrlsm9pfohhkc89mbiub9qdj3ulnuq.apps.googleusercontent.com",
+              "client_id": "57885613307-1up2gr6c04fa6l4d28140adv8vb87jdu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
