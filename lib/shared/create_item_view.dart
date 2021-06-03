@@ -38,7 +38,6 @@ class _CreateItemViewState extends State<CreateItemView> {
     title = widget.item?.title;
     price = widget.item?.price;
     desc = widget.item?.desc;
-    address = widget.item?.address;
     count = widget.item?.count;
     pickupTime = widget.item?.pickupTime;
   }
@@ -110,18 +109,6 @@ class _CreateItemViewState extends State<CreateItemView> {
                 SizedBox(height: 8),
                 PlatformTextFormField(
                   controller: TextEditingController.fromValue(
-                    TextEditingValue(text: address ?? ''),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      this.address = value;
-                    });
-                  },
-                  hintText: AppLocalizations.of(context)?.itemAddressHint,
-                ),
-                SizedBox(height: 8),
-                PlatformTextFormField(
-                  controller: TextEditingController.fromValue(
                     TextEditingValue(text: count?.toString() ?? ''),
                   ),
                   keyboardType: TextInputType.number,
@@ -155,26 +142,22 @@ class _CreateItemViewState extends State<CreateItemView> {
                 "",
             onPressed: () async {
               CollectionReference items =
-                  FirebaseFirestore.instance.collection('items');
+                  FirebaseFirestore.instance.collection('sales').doc(widget.sale.id).collection('items');
               var id = widget.item?.id;
+              var res;
+
+              var delta = {
+                'title': this.title,
+                'price': this.price,
+                'desc': this.desc,
+                'address': this.address,
+                'count': this.count,
+                'pickupTime': this.pickupTime,
+              };
               if (id != null) {
-                await items.doc(id).set({
-                  title: this.title,
-                  price: this.price,
-                  desc: this.desc,
-                  address: this.address,
-                  count: this.count,
-                  pickupTime: this.pickupTime,
-                });
+                await items.doc(id).set(delta);
               } else {
-                await items.add({
-                  title: this.title,
-                  price: this.price,
-                  desc: this.desc,
-                  address: this.address,
-                  count: this.count,
-                  pickupTime: this.pickupTime,
-                });
+                res = await items.add(delta);
               }
 
               return Navigator.of(context).pop();

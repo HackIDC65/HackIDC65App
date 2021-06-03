@@ -1,45 +1,50 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/models/item.dart';
+import 'package:flutter_app/models/sale.dart';
 import 'package:flutter_app/shared/item_card.dart';
 
-class ItemsListView extends StatelessWidget {
-  // final List<String> items = <String>['A', 'B', 'C'];
-  final items = [
-    Item(
-        id: '1',
-        title: 'Round Dinner Table',
-        price: 15,
-        desc: 'An amazing dinner table 2 years old'),
-    Item(
-        id: '2',
-        title: 'Round Dinner Table',
-        price: 0,
-        desc: 'An amazing dinner table 2 years old'),
-    Item(
-        id: '3',
-        title: 'Round Dinner Table',
-        price: 15,
-        desc: 'An amazing dinner table 2 years old'),
-    Item(
-        id: '4',
-        title: 'Round Dinner Table',
-        price: 15,
-        desc: 'An amazing dinner table 2 years old'),
-    Item(
-        id: '5',
-        title: 'Round Dinner Table',
-        price: 15,
-        desc: 'An amazing dinner table 2 years old')
-  ];
+class ItemsListView extends StatefulWidget {
+  final Sale sale;
+
+  const ItemsListView({required this.sale});
 
   @override
+  _ItemsListViewState createState() => _ItemsListViewState();
+}
+
+class _ItemsListViewState extends State<ItemsListView> {
+  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return ItemCard(item: items[index]);
+    final Stream<QuerySnapshot> _itemsStream = FirebaseFirestore.instance
+        .collection('sales')
+        .doc(widget.sale.id)
+        .collection('items')
+        .snapshots();
+
+    return StreamBuilder<QuerySnapshot>(
+      stream: _itemsStream,
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text('Something went wrong');
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text("Loading");
+        }
+
+        var itemsList = snapshot.data?.docs.map((DocumentSnapshot document) {
+          return Item.fromJson(document.id, document.data()! as Map<String, Object?>);
+        }).toList() ?? [];
+
+        return ListView.builder(
+          itemBuilder: (context, index) {
+            return ItemCard(item: itemsList[index]);
+          },
+          padding: const EdgeInsets.all(10),
+          itemCount: itemsList.length,
+        );
       },
-      padding: const EdgeInsets.all(10),
-      itemCount: items.length,
     );
   }
 }

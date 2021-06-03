@@ -60,7 +60,7 @@ class ItemCard extends StatelessWidget {
                     color: Colors.lightGreenAccent.withOpacity(0.85),
                     padding: EdgeInsets.fromLTRB(8, 3, 35, 3),
                     child: Text(
-                        item.price == 0 ? 'Free!' : '₪${item.price.toString()}',
+                        item.price == 0 ? 'Free!' : item.price == null ? 'NaN' : '₪${item.price?.toString()}',
                         style: Theme.of(context).textTheme.headline5),
                   )),
             ])),

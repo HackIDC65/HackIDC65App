@@ -4,7 +4,6 @@ class Item {
   final int? price;
   final int? count;
   final String? desc;
-  final String? address;
   final DateTime? pickupTime;
 
   Item({
@@ -13,7 +12,18 @@ class Item {
     this.price,
     this.count,
     this.desc,
-    this.address,
     this.pickupTime,
   });
+
+  Item.fromJson(String id, Map<String, Object?> json)
+      : this(
+          id: id,
+          title: json['title']! as String,
+          price: json['price'] is int ? json['price'] as int : null,
+          count: json['count'] is int ? json['count'] as int : null,
+          desc: json['desc'] is String ? json['desc'] as String : null,
+          pickupTime: json['pickupTime'] is DateTime
+              ? json['pickupTime'] as DateTime
+              : null,
+        );
 }

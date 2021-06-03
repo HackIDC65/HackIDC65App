@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/sale.dart';
@@ -10,6 +11,7 @@ class ViewSaleScreen extends StatefulWidget {
   Sale sale;
 
   ViewSaleScreen(this.id, {required this.sale});
+
   ViewSaleScreen.sale(Sale fullSale)
       : this.id = fullSale.id,
         this.sale = fullSale;
@@ -46,7 +48,7 @@ class _ViewSaleScreenState extends State<ViewSaleScreen> {
       ),
       backgroundColor: const Color(0xfffffbf4),
       body: SafeArea(
-        child: ItemsListView(),
+        child: ItemsListView(sale: widget.sale),
       ),
     );
   }
