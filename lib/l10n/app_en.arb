@@ -279,23 +279,24 @@
   "@writeACommentOnMeal": {
     "description": ""
   },
-  "termsAndConditions": "תנאי שימוש",
+  "termsAndConditions": "terms & conds",
   "@termsAndConditions": {
     "description": ""
   },
-  "loginTitle": "הצטרפו לקווסט בורגר",
+  "loginTitle": "Join now",
+  "loginTitle": "Join now",
   "@loginTitle": {
     "description": ""
   },
-  "loginSubtitle": "על מנת לדרג או להוסיף מסעדה יש צורך להתחבר תחילה.",
+  "loginSubtitle": "To create a sale or reserve an item, join up now.",
   "@loginSubtitle": {
     "description": ""
   },
-  "loginUsingGoogle": "באמצעות גוגל",
+  "loginUsingGoogle": "Sign in with Google",
   "@loginUsingGoogle": {
     "description": ""
   },
-  "loginUsingFacebook": "באמצעות פייסבוק",
+  "loginUsingFacebook": "Sign in with Facebook",
   "@loginUsingFacebook": {
     "description": ""
   },

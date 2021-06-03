@@ -1,6 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/home_screen.dart';
+import 'package:flutter_app/shared/loader.dart';
 import 'package:flutter_app/utils/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -100,30 +102,46 @@ class _AppState extends State<App> {
         //     web: PlatformStyle.Cupertino,
         //   ),
         // ),
-        builder: (context) => PlatformApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          title: 'HackIDC65',
-          material: (_, __) {
-            return new MaterialAppData(
-              theme: materialTheme,
-              darkTheme: materialDarkTheme,
-              themeMode: brightness == Brightness.light
-                  ? ThemeMode.light
-                  : ThemeMode.dark,
-            );
+        builder: (context) => FutureBuilder(
+          future: Firebase.initializeApp(),
+          builder: (context, snapshot) {
+            // Check for errors
+            if (snapshot.hasError) {
+              return Center(child: Text("Error"));
+            }
+
+            // Once complete, show your application
+            if (snapshot.connectionState == ConnectionState.done) {
+              return PlatformApp(
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                title: 'HackIDC65',
+                material: (_, __) {
+                  return new MaterialAppData(
+                    theme: materialTheme,
+                    darkTheme: materialDarkTheme,
+                    themeMode: brightness == Brightness.light
+                        ? ThemeMode.light
+                        : ThemeMode.dark,
+                  );
+                },
+                cupertino: (_, __) => new CupertinoAppData(
+                  theme: cupertinoTheme,
+                ),
+                home: HomeScreen(),
+                // home: LandingPage(() {
+                //   setState(() {
+                //     brightness = brightness == Brightness.light
+                //         ? Brightness.dark
+                //         : Brightness.light;
+                //   });
+                // }),
+              );
+            }
+
+            // Otherwise, show something whilst waiting for initialization to complete
+            return Loader();
           },
-          cupertino: (_, __) => new CupertinoAppData(
-            theme: cupertinoTheme,
-          ),
-          home: HomeScreen(),
-          // home: LandingPage(() {
-          //   setState(() {
-          //     brightness = brightness == Brightness.light
-          //         ? Brightness.dark
-          //         : Brightness.light;
-          //   });
-          // }),
         ),
       ),
     );
