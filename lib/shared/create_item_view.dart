@@ -144,7 +144,6 @@ class _CreateItemViewState extends State<CreateItemView> {
               CollectionReference items =
                   FirebaseFirestore.instance.collection('sales').doc(widget.sale.id).collection('items');
               var id = widget.item?.id;
-              var res;
 
               var delta = {
                 'title': this.title,
@@ -157,13 +156,13 @@ class _CreateItemViewState extends State<CreateItemView> {
               if (id != null) {
                 await items.doc(id).set(delta);
               } else {
-                res = await items.add(delta);
+                await items.add(delta);
               }
 
               return Navigator.of(context).pop();
             },
           ),
-          SizedBox(height: 24),
+          SizedBox(height: 48),
         ],
       ),
     );
