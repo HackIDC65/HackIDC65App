@@ -1,21 +1,21 @@
 {
-  "logoTitle": "דירוג ההמבורגרים של ישראל",
+  "logoTitle": "HackIDC App",
   "@logoTitle": {
     "description": "The app's main logo title"
   },
-  "discoverBurgers": "גלו המבורגרים",
+  "discoverBurgers": "Active Sales",
   "@discoverBurgers": {
     "description": "The explore's tab name"
   },
-  "discoverQuests": "קווסטים (בקרוב)",
+  "discoverQuests": "Recent Sales",
   "@discoverQuests": {
     "description": "The quests's tab name"
   },
-  "discoverLists": "אוספים (בקרוב)",
+  "discoverLists": "Find Items",
   "@discoverLists": {
     "description": "The lists's tab name"
   },
-  "userProfile": "פרופיל (בקרוב)",
+  "userProfile": "Profile",
   "@userProfile":  {
     "description": ""
   },
