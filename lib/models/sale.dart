@@ -15,6 +15,6 @@ class Sale {
     id: id,
     title: json['title']! as String,
     itemsCount: json['itemsCount'] is int ? json['itemsCount'] as int : 0,
-    location: json['location'] as String,
+    location: json['location'] is String? json['location'] as String : '',
   );
 }

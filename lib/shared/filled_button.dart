@@ -9,6 +9,7 @@ class FilledButton extends StatefulWidget {
   final double? width;
   final double? height;
   final BorderRadiusGeometry? borderRadius;
+  final BoxBorder? border;
   final shadow;
   final Color? shadowColor;
   final dynamic padding;
@@ -26,6 +27,7 @@ class FilledButton extends StatefulWidget {
     this.height,
     this.borderRadius,
     this.minWidth,
+    this.border,
   });
 
   FilledButton.text(
@@ -42,6 +44,7 @@ class FilledButton extends StatefulWidget {
     TextStyle? textStyle,
     this.borderRadius,
     this.minWidth,
+    this.border,
   }) : this.child = __buildTextChild(text, textStyle, icon);
 
   @override
@@ -96,17 +99,18 @@ class _FilledButtonState extends State<FilledButton> {
       ),
     );
 
-    if (widget.shadow != null)
+    if (widget.shadow != null || widget.border != null)
       return Container(
         decoration: BoxDecoration(
           borderRadius: widget.borderRadius,
-          boxShadow: [
+          border: widget.border,
+          boxShadow: widget.shadow != null ? [
             BoxShadow(
               color: widget.shadowColor ?? Colors.grey.withOpacity(0.1),
               blurRadius: 4,
               offset: Offset(0, 2),
             ),
-          ],
+          ] : [],
         ),
         child: btn,
       );

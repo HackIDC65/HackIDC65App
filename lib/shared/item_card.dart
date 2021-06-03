@@ -60,7 +60,11 @@ class ItemCard extends StatelessWidget {
                     color: Colors.lightGreenAccent.withOpacity(0.85),
                     padding: EdgeInsets.fromLTRB(8, 3, 35, 3),
                     child: Text(
-                        item.price == 0 ? 'Free!' : '₪${item.price.toString()}',
+                        item.price == 0
+                            ? 'Free!'
+                            : item.price == null
+                            ? 'Free!'
+                            : '₪${item.price?.toString()}',
                         style: Theme.of(context).textTheme.headline5),
                   )),
             ])),
@@ -73,12 +77,12 @@ class ItemCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        child: Text(item.title,
+                        child: Text(item.title ?? '',
                             style: Theme.of(context).textTheme.headline4),
                       ),
                       Container(
                         child: Text(
-                          item.desc,
+                          item.desc ?? '',
                           style: Theme.of(context).textTheme.bodyText1,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
