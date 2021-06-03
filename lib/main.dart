@@ -103,7 +103,7 @@ class _AppState extends State<App> {
         builder: (context) => PlatformApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          title: 'QuestBurger',
+          title: 'HackIDC65',
           material: (_, __) {
             return new MaterialAppData(
               theme: materialTheme,
