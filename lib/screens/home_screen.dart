@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/shared/items_list_view.dart';
 import 'package:flutter_app/shared/views/sales_list_view.dart';
-import 'package:flutter_app/shared/views/views/profile_view.dart';
+import 'package:flutter_app/shared/views/profile_view.dart';
 import 'package:flutter_app/utils/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
