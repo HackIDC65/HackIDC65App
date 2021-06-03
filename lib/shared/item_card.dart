@@ -17,7 +17,7 @@ class ItemCard extends StatelessWidget {
         Navigator.of(context).push(platformPageRoute(
           context: context,
           builder: (BuildContext context) {
-            return ViewItemScreen(item.id);
+            return ViewItemScreen(this.item.id, item: this.item);
           },
         ));
       },
@@ -57,7 +57,7 @@ class ItemCard extends StatelessWidget {
                   bottom: 20,
                   right: 0,
                   child: Container(
-                    color: Colors.lightBlue.withOpacity(0.8),
+                    color: Colors.lightGreenAccent.withOpacity(0.85),
                     padding: EdgeInsets.fromLTRB(8, 3, 35, 3),
                     child: Text(
                         item.price == 0 ? 'Free!' : '₪${item.price.toString()}',
@@ -74,29 +74,18 @@ class ItemCard extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline4),
                   ),
                   Container(
-                    child: Text(item.desc ?? '',
-                        style: Theme.of(context).textTheme.bodyText1),
+                    child: Text(
+                      item.desc ?? '',
+                      style: Theme.of(context).textTheme.bodyText1,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      softWrap: false,
+                    ),
+                    width: 400,
                   ),
                 ],
               ),
             ),
-            Center(
-              child: Container(
-                margin: EdgeInsets.only(top: 20.0),
-                child: FilledButton(
-                  child: Text('More Details'),
-                  height: 30.0,
-                  onPressed: () {
-                    Navigator.of(context).push(platformPageRoute(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return ViewItemScreen(item.id);
-                      },
-                    ));
-                  },
-                ),
-              ),
-            )
           ],
         ),
       ),
