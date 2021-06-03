@@ -58,8 +58,10 @@ class _ViewItemViewState extends State<ViewItemView> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Wrap(children: [
                                 Text(
@@ -70,7 +72,11 @@ class _ViewItemViewState extends State<ViewItemView> {
                                       ?.copyWith(fontSize: 28.0),
                                 )
                               ]),
-                              Wrap(children: [Text(widget.item.desc ?? "")]),
+                              SizedBox(height: 8),
+                              Wrap(children: [Text(widget.item.desc ?? "No description...", style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.copyWith(fontSize: 20.0),),],),
                             ],
                           ),
                           Text(
