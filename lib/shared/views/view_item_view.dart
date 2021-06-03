@@ -1,18 +1,32 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
+import 'package:flutter_app/models/sale.dart';
+import 'package:flutter_app/shared/custom_chip.dart';
 import 'package:flutter_app/shared/filled_button.dart';
 
 class ViewItemView extends StatefulWidget {
   final Item item;
+  final Sale sale;
 
-  ViewItemView(this.item);
+  ViewItemView(this.item, this.sale);
 
   @override
   _ViewItemViewState createState() => _ViewItemViewState();
 }
 
 class _ViewItemViewState extends State<ViewItemView> {
+  late Item item;
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+
+    this.item = widget.item;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,14 +51,33 @@ class _ViewItemViewState extends State<ViewItemView> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Container(
-                          height: 32,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(24),
-                              topRight: Radius.circular(24),
-                            ),
+                        SizedBox(
+                          height: 45,
+                          child: Stack(
+                            children: [
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  height: 32,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(24),
+                                      topRight: Radius.circular(24),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              if (widget.item.reserved)
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 32),
+                                  child: CustomChip(
+                                    "Reserved",
+                                    color: Colors.red,
+                                    textColor: Colors.white,
+                                  ),
+                                ),
+                            ],
                           ),
                         ),
                       ],
@@ -73,10 +106,17 @@ class _ViewItemViewState extends State<ViewItemView> {
                                 )
                               ]),
                               SizedBox(height: 8),
-                              Wrap(children: [Text(widget.item.desc ?? "No description...", style: Theme.of(context)
-                                  .textTheme
-                                  .headline6
-                                  ?.copyWith(fontSize: 20.0),),],),
+                              Wrap(
+                                children: [
+                                  Text(
+                                    widget.item.desc ?? "No description...",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6
+                                        ?.copyWith(fontSize: 20.0),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                           Text(
@@ -142,11 +182,22 @@ class _ViewItemViewState extends State<ViewItemView> {
                     Expanded(
                       child: FilledButton(
                         child: Text(
-                          'Reserve This Item!',
+                          'Reserve Now!',
                           style: Theme.of(context).textTheme.headline5,
                         ),
+                        color: widget.item.reserved ? Colors.grey : const Color(0Xffffbf00),
                         onPressed: () {
-                          print(widget.item.id + ' was Reserved');
+                          CollectionReference items = FirebaseFirestore.instance
+                              .collection('sales')
+                              .doc(widget.sale.id)
+                              .collection('items');
+
+                          items.doc(widget.item.id).set({'reserved': true},
+                              SetOptions(merge: true)).then((res) {
+                            setState(() {
+                              widget.item.reserved = true;
+                            });
+                          });
                         },
                       ),
                     ),

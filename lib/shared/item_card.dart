@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
+import 'package:flutter_app/models/sale.dart';
 import 'package:flutter_app/screens/view_item_screen.dart';
 import 'package:flutter_app/shared/filled_button.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ItemCard extends StatelessWidget {
   final Item item;
+  final Sale sale;
 
-  ItemCard({required this.item});
+  ItemCard({required this.item, required this.sale});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,12 @@ class ItemCard extends StatelessWidget {
         Navigator.of(context).push(platformPageRoute(
           context: context,
           builder: (BuildContext context) {
-            return ViewItemScreen(this.item.id, item: this.item);
+            return ViewItemScreen(
+              this.item.id,
+              this.sale.id,
+              item: this.item,
+              sale: this.sale
+            );
           },
         ));
       },
@@ -63,8 +70,8 @@ class ItemCard extends StatelessWidget {
                         item.price == 0
                             ? 'Free!'
                             : item.price == null
-                            ? 'Free!'
-                            : '₪${item.price?.toString()}',
+                                ? 'Free!'
+                                : '₪${item.price?.toString()}',
                         style: Theme.of(context).textTheme.headline5),
                   )),
             ])),
@@ -103,8 +110,7 @@ class ItemCard extends StatelessWidget {
                             );
                           }).toList();
                         },
-                      )
-                  ),
+                      )),
                 ],
               ),
             ),
