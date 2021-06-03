@@ -1,0 +1,410 @@
+{
+  "logoTitle": "דירוג ההמבורגרים של ישראל",
+  "@logoTitle": {
+    "description": "The app's main logo title"
+  },
+  "discoverBurgers": "גלו המבורגרים",
+  "@discoverBurgers": {
+    "description": "The explore's tab name"
+  },
+  "discoverQuests": "קווסטים (בקרוב)",
+  "@discoverQuests": {
+    "description": "The quests's tab name"
+  },
+  "discoverLists": "אוספים (בקרוב)",
+  "@discoverLists": {
+    "description": "The lists's tab name"
+  },
+  "userProfile": "פרופיל (בקרוב)",
+  "@userProfile":  {
+    "description": ""
+  },
+  "allBurgersDisplayed": "כל ההמבורגרים",
+  "@allBurgersDisplayed": {
+    "description": ""
+  },
+  "restaurantNamePrefix": "מסעדת {name}",
+  "@restaurantNamePrefix": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "noMealReviewer": "אין חוות דעת",
+  "@noMealReviewer": {
+    "description": ""
+  },
+  "mealReviewsNoReviewer": "{reviewersCount} אנשים חוו דעה",
+  "@mealReviewsNoReviewer": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "reviewersCount": {}
+    }
+  },
+  "singleMealReviewer": "{firstName} חווה דעה על מנה זו",
+  "@singleMealReviewer": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "firstName": {"type": "String"},
+      "lastName": {"type": "String"}
+    }
+  },
+  "multipleMealReviewers": "{firstName} ועוד {reviewersCount} אנשים חוו דעה",
+  "@multipleMealReviewers": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "firstName": {"type": "String"},
+      "lastName": {"type": "String"},
+      "reviewersCount": {}
+    }
+  },
+  "mealDoesNotExists": "נראה שהמנה שניסית לחפש לא קיימת...",
+  "@mealDoesNotExists": {
+    "description": ""
+  },
+  "tryAgain": "נסה שוב",
+  "@tryAgain": {
+    "description": ""
+  },
+  "notYetReviewed": "טרם דורג",
+  "@notYetReviewed": {
+    "description": ""
+  },
+  "reviewMeal": "דרגו את {title}",
+  "@reviewMeal": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+  "addToFavorites": "הוסיפו לאוסף המנות הפרטי",
+  "@addToFavorites": {
+    "description": ""
+  },
+  "removeFromFavorites": "הסרה מהאוסף הפרטי",
+  "@removeFromFavorites": {
+    "description": ""
+  },
+  "share": "שתפו",
+  "@share": {
+    "description": ""
+  },
+  "orderDelivery": "הזמינו משלוח",
+  "@orderDelivery": {
+    "description": ""
+  },
+  "placeDetailsTab": "משלוחים ופרטים",
+  "@placeDetailsTab": {
+    "description": ""
+  },
+  "mealDetailsTab": "חוות דעת",
+  "@mealDetailsTab": {
+    "description": ""
+  },
+  "addAReview": "כתבו חוות דעת",
+  "@addAReview": {
+    "description": ""
+  },
+  "failedToLoadMealReviews": "נכשל בעת טעינת חוות דעת.",
+  "@failedToLoadMealReviews": {
+    "description": ""
+  },
+  "userReviewedSimilarly": "{firstName} דירג בציון דומה גם את",
+  "@userReviewedSimilarly": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "firstName": {"type": "String"}
+    }
+  },
+  "delivery": "משלוח",
+  "@delivery": {
+    "description": ""
+  },
+  "wolt": "וולט",
+  "@wolt": {
+    "description": ""
+  },
+  "tenbis": "תן ביס",
+  "@tenbis": {
+    "description": ""
+  },
+  "cibus": "סיבוס",
+  "@cibus": {
+    "description": ""
+  },
+  "selfDelivery": "משלוח עצמי",
+  "@selfDelivery": {
+    "description": ""
+  },
+  "address": "כתובת",
+  "@address": {
+    "description": ""
+  },
+  "website": "אתר",
+  "@website": {
+    "description": ""
+  },
+  "phone": "טלפון",
+  "@phone": {
+    "description": ""
+  },
+  "location": "מיקום",
+  "@location": {
+    "description": ""
+  },
+  "missingAddress": "אין כתובת",
+  "@missingAddress": {
+    "description": ""
+  },
+  "missingWebsite": "אין כתובת אתר",
+  "@missingWebsite": {
+    "description": ""
+  },
+  "missingPhone": "אין מספר טלפון",
+  "@missingPhone": {
+    "description": ""
+  },
+  "mealEditSuggestions": "הצעות לעריכת פרטי מנה (בקרוב)",
+  "@mealEditSuggestions": {
+    "description": ""
+  },
+  "placeEditSuggestions": "הצעות לתיקון פרטי מסעדה (בקרוב)",
+  "@placeEditSuggestions": {
+    "description": ""
+  },
+  "shareMealText": "רציתי לשתף אותך במנה שמצאתי: {title}\nhttps://questburger.com/meal/{mealId}",
+  "@shareMealText": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "mealId": {"type": "String"},
+      "title": {"type": "String"}
+    }
+  },
+  "shareMealEmailSubject": "רציתי לשתף אותך במנה שמצאתי",
+  "@shareMealEmailSubject": {
+    "description": ""
+  },
+  "reviewMealTitle": "דרג את {title}",
+  "@reviewMealTitle": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+  "reviewMealPartType": "דרג את ה-{type}",
+  "@reviewMealPartType": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "type": {"type": "String"}
+    }
+  },
+  "reviewMealPartTypeBun": "איך הייתה הלחמניה?",
+  "@reviewMealPartTypeBun": {
+    "description": ""
+  },
+  "reviewMealPartTypePatty": "איך הייתה הקציצה?",
+  "@reviewMealPartTypePatty": {
+    "description": ""
+  },
+  "reviewMealPartTypeAddons": "איך היו התוספות?",
+  "@reviewMealPartTypeAddons": {
+    "description": ""
+  },
+  "reviewMealValueForMoney": "האם המחיר הצדיק את המנה?",
+  "@reviewMealValueForMoney": {
+    "description": ""
+  },
+  "sendPartsReview": "שליחת דירוג  ({score})",
+  "@sendPartsReview": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "score": {}
+    }
+  },
+  "sendPartsReviewNotReady": "שליחת דירוג",
+  "@sendPartsReviewNotReady": {
+    "description": ""
+  },
+  "goBack": "חזור",
+  "@goBack": {
+    "description": ""
+  },
+  "sendMealTextReview": "הוספת חוות דעת",
+  "@sendMealTextReview": {
+    "description": ""
+  },
+  "deliveryReview": "נאכל בהזמנה",
+  "@deliveryReview": {
+    "description": ""
+  },
+  "inPlaceReview": "נאכל במקום",
+  "@inPlaceReview": {
+    "description": ""
+  },
+  "successfullyReviewed": "תודה, הדירוג נקלט בהצלחה!",
+  "@successfullyReviewed": {
+    "description": ""
+  },
+  "willYouRecommendMeal": "האם תמליץ/י על {title} לאחרים?",
+  "@willYouRecommendMeal": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+  "optional": "אופציונלי",
+  "@optional": {
+    "description": ""
+  },
+  "lowLikelihoodToRecommend": "סבירות נמוכה מאוד",
+  "@lowLikelihoodToRecommend": {
+    "description": ""
+  },
+  "highLikelihoodToRecommend": "סבירות גבוהה מאוד",
+  "@highLikelihoodToRecommend": {
+    "description": ""
+  },
+  "writeACommentOnMeal": "כתוב חוות דעת על המנה",
+  "@writeACommentOnMeal": {
+    "description": ""
+  },
+  "termsAndConditions": "תנאי שימוש",
+  "@termsAndConditions": {
+    "description": ""
+  },
+  "loginTitle": "הצטרפו לקווסט בורגר",
+  "@loginTitle": {
+    "description": ""
+  },
+  "loginSubtitle": "על מנת לדרג או להוסיף מסעדה יש צורך להתחבר תחילה.",
+  "@loginSubtitle": {
+    "description": ""
+  },
+  "loginUsingGoogle": "באמצעות גוגל",
+  "@loginUsingGoogle": {
+    "description": ""
+  },
+  "loginUsingFacebook": "באמצעות פייסבוק",
+  "@loginUsingFacebook": {
+    "description": ""
+  },
+  "loadingMeals": "טוען מנות..",
+  "@loadingMeals": {
+    "description": ""
+  },
+  "search": "חיפוש",
+  "@search": {
+    "description": ""
+  },
+  "filterQuery": "לפי שם",
+  "@filterQuery": {
+    "description": ""
+  },
+  "filterQueryPlaceholder": "חיפוש מסעדה או מנה",
+  "@filterQueryPlaceholder": {
+    "description": ""
+  },
+  "actionSearch": "חפש",
+  "@actionSearch": {
+    "description": ""
+  },
+  "hintSelectZone": "בחר אזור",
+  "@hintSelectZone": {
+    "description": ""
+  },
+  "filterDietMeat": "בשרית",
+  "@filterDietMeat": {
+    "description": ""
+  },
+  "filterDietVegan": "טבעונית",
+  "@filterDietVegan": {
+    "description": ""
+  },
+  "filterDietVegetarian": "צמחונית",
+  "@filterDietVegetarian": {
+    "description": ""
+  },
+  "filterDiet": "מנה",
+  "@filterDiet": {
+    "description": ""
+  },
+  "filterDelivery": "משלוחים",
+  "@filterDelivery": {
+    "description": ""
+  },
+  "filterKosher": "כשרות",
+  "@filterKosher": {
+    "description": ""
+  },
+  "filterKosherFully": "כשר עם תעודה",
+  "@filterKosherFully": {
+    "description": ""
+  },
+  "filterKosherKinda": "כשרות אלטרנטיבית",
+  "@filterKosherKinda": {
+    "description": ""
+  },
+  "filterKosherNon": "לא כשר",
+  "@filterKosherNon": {
+    "description": ""
+  },
+  "mealPartTypeBun": "לחמניה",
+  "@mealPartTypeBun": {
+    "description": ""
+  },
+  "mealPartTypePatty": "קציצה",
+  "@mealPartTypePatty": {
+    "description": ""
+  },
+  "mealPartTypeAddons": "תוספות",
+  "@mealPartTypeAddons": {
+    "description": ""
+  },
+  "moreOptionsText": "{number}+",
+  "@moreOptionsText": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "number": {"type": "String"}
+    }
+  },
+  "vegan": "טבעוני",
+  "@vegan": {
+    "description": ""
+  },
+  "vegetarian": "צמחוני",
+  "@vegetarian": {
+    "description": ""
+  },
+  "meat": "בשרי",
+  "@meat": {
+    "description": ""
+  },
+  "filterMaxPrice": "מחיר מקסימלי",
+  "@filterMaxPrice": {
+    "description": ""
+  },
+  "noPriceRangeFilter": "ללא",
+  "@noPriceRangeFilter": {
+    "description": ""
+  },
+  "priceRangeFilterMoreThen": "{number}+",
+  "@priceRangeFilterMoreThen": {
+    "description": "",
+    "type": "text",
+    "placeholders": {
+      "number": {"type": "String"}
+    }
+  }
+}

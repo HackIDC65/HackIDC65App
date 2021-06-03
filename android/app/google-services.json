@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "612761751783",
+    "project_id": "questburger-285709",
+    "storage_bucket": "questburger-285709.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612761751783:android:98528fc72a0ea4177c9242",
+        "android_client_info": {
+          "package_name": "com.questburger.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "612761751783-0ogrlsm9pfohhkc89mbiub9qdj3ulnuq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1omH6YkfGJCoZ_hozbAP6GfeEqnZjT-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "612761751783-0ogrlsm9pfohhkc89mbiub9qdj3ulnuq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QuestBurger</string>
+    <string name="facebook_app_id">338953043805611</string>
+    <string name="fb_login_protocol_scheme">fb338953043805611</string>
+</resources>

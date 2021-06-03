@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>612761751783-j6mu8bmgfuq63u99opnik9aoffkm5uge.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.612761751783-j6mu8bmgfuq63u99opnik9aoffkm5uge</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>612761751783-14i3tohvubu8gbth0mc5p3ea24qapadl.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBAkIG8weMkBZ6lXYcHhej3hr5ZefCKIUE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>612761751783</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.questburger.flutterApp</string>
+	<key>PROJECT_ID</key>
+	<string>questburger-285709</string>
+	<key>STORAGE_BUCKET</key>
+	<string>questburger-285709.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:612761751783:ios:7615379ea14a36107c9242</string>
+</dict>
+</plist>
