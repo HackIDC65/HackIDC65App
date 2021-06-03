@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
+import 'package:flutter_app/models/sale.dart';
 import 'package:flutter_app/shared/filled_button.dart';
 import 'package:flutter_app/shared/gallery.dart';
 import 'package:flutter_app/utils/get_image.dart';
@@ -10,8 +11,9 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class CreateItemView extends StatefulWidget {
   final Item? item;
+  final Sale sale;
 
-  const CreateItemView({this.item});
+  const CreateItemView({required this.sale, this.item});
 
   @override
   _CreateItemViewState createState() => _CreateItemViewState();
@@ -132,13 +134,12 @@ class _CreateItemViewState extends State<CreateItemView> {
                   controller: TextEditingController.fromValue(
                     TextEditingValue(text: count?.toString() ?? ''),
                   ),
-                  keyboardType: TextInputType.number,
                   onChanged: (value) {
                     setState(() {
-                      // this.count = value;
+                      this.pickupTime = DateTime.parse(value);
                     });
                   },
-                  hintText: AppLocalizations.of(context)?.itemCountHint,
+                  hintText: AppLocalizations.of(context)?.itemAvailableFromHint,
                 ),
               ],
             ),
@@ -149,7 +150,9 @@ class _CreateItemViewState extends State<CreateItemView> {
                     ? AppLocalizations.of(context)?.saveItem
                     : AppLocalizations.of(context)?.createItem) ??
                 "",
-            onPressed: () {},
+            onPressed: () {
+              
+            },
           ),
           SizedBox(height: 24),
         ],

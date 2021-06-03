@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_app/models/sale.dart';
+import 'package:flutter_app/screens/create_item_screen.dart';
 import 'package:flutter_app/shared/items_list_view.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -21,12 +23,26 @@ class _ViewSaleScreenState extends State<ViewSaleScreen> {
   Widget build(BuildContext context) {
     return PlatformScaffold(
       appBar: PlatformAppBar(
+        title: Text(widget.sale.title),
         leading: Builder(
           builder: (context) => PlatformIconButton(
             icon: Image.asset("graphics/ic_back.png"),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
+        trailingActions: [
+          PlatformIconButton(
+            icon: Icon(context.platformIcons.add),
+            onPressed: () {
+              Navigator.of(context).push(platformPageRoute(
+                context: context,
+                builder: (BuildContext context) {
+                  return CreateItemScreen(item: null, sale: widget.sale);
+                },
+              ));
+            },
+          )
+        ],
       ),
       backgroundColor: const Color(0xfffffbf4),
       body: SafeArea(

@@ -38,7 +38,7 @@ class _ViewItemViewState extends State<ViewItemView> {
                 Container(
                   margin: EdgeInsets.all(10),
                   child: Text(
-                    widget.item.title,
+                    widget.item.title ?? '',
                     style: Theme.of(context).textTheme.headline3,
                   ),
                 )
@@ -49,7 +49,7 @@ class _ViewItemViewState extends State<ViewItemView> {
                 Container(
                   margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: Text(
-                    widget.item.desc,
+                    widget.item.desc ?? '',
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                 )

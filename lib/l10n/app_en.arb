@@ -442,5 +442,10 @@
   "@saveItem": {
     "description": "",
     "type": "text"
+  },
+  "itemAvailableFromHint": "Available From",
+  "@itemAvailableFromHint": {
+    "description": "",
+    "type": "text"
   }
 }
