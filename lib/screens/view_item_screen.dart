@@ -24,7 +24,7 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
       appBar: PlatformAppBar(
         leading: Builder(
           builder: (context) => PlatformIconButton(
-            icon: Icon(Icons.keyboard_return_rounded),//Image.asset("graphics/ic_back.png"),
+            icon: Image.asset("graphics/ic_back.png"),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
