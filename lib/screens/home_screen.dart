@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/login_screen.dart';
+import 'package:flutter_app/shared/create_item_view.dart';
 import 'package:flutter_app/utils/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+import 'create_item_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -27,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.of(context).push(platformPageRoute(
                 context: context,
                 builder: (BuildContext context) {
-                  return LoginScreen();
+                  return CreateItemScreen();
                 },
               ));
             },
