@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/shared/items_list_view.dart';
 import 'package:flutter_app/screens/login_screen.dart';
 import 'package:flutter_app/shared/create_item_view.dart';
 import 'package:flutter_app/utils/get_it.dart';
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildPage(int index) {
     switch (index) {
       case 0:
-        return Center(child: Text("hello"));
+        return Center(child: ItemsListView());
       case 3:
         return Center(child: Text("hello 2"));
       default:
