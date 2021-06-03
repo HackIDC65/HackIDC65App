@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/sale.dart';
+import 'package:flutter_app/screens/create_item_screen.dart';
 import 'package:flutter_app/shared/items_list_view.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -9,6 +11,7 @@ class ViewSaleScreen extends StatefulWidget {
   Sale sale;
 
   ViewSaleScreen(this.id, {required this.sale});
+
   ViewSaleScreen.sale(Sale fullSale)
       : this.id = fullSale.id,
         this.sale = fullSale;
@@ -22,31 +25,30 @@ class _ViewSaleScreenState extends State<ViewSaleScreen> {
   Widget build(BuildContext context) {
     return PlatformScaffold(
       appBar: PlatformAppBar(
+        title: Text(widget.sale.title),
         leading: Builder(
           builder: (context) => PlatformIconButton(
-            icon: Icon(Icons.keyboard_return_rounded), //Image.asset("graphics/ic_back.png"),
+            icon: Image.asset("graphics/ic_back.png"),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
         trailingActions: [
-          Container(
-              alignment: Alignment.topRight,
-              child: PopupMenuButton(
-                itemBuilder: (BuildContext context) {
-                  return {'Edit', 'Delete'}.map((String choice) {
-                    return PopupMenuItem<String>(
-                      value: choice,
-                      child: Text(choice),
-                    );
-                  }).toList();
+          PlatformIconButton(
+            icon: Icon(context.platformIcons.add),
+            onPressed: () {
+              Navigator.of(context).push(platformPageRoute(
+                context: context,
+                builder: (BuildContext context) {
+                  return CreateItemScreen(item: null, sale: widget.sale);
                 },
-              )
-          ),
+              ));
+            },
+          )
         ],
       ),
       backgroundColor: const Color(0xfffffbf4),
       body: SafeArea(
-        child: ItemsListView(),
+        child: ItemsListView(sale: widget.sale),
       ),
     );
   }

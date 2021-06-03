@@ -1,15 +1,29 @@
 class Item {
   final String id;
-  final String title;
-  final int price;
-  final String desc;
-  final DateTime pickupTime;
+  final String? title;
+  final int? price;
+  final int? count;
+  final String? desc;
+  final DateTime? pickupTime;
 
   Item({
     required this.id,
-    required this.title,
-    required this.price,
-    this.desc = '',
-    DateTime? pickupTime,
-  }) : this.pickupTime = pickupTime ?? DateTime.now();
+    this.title,
+    this.price,
+    this.count,
+    this.desc,
+    this.pickupTime,
+  });
+
+  Item.fromJson(String id, Map<String, Object?> json)
+      : this(
+          id: id,
+          title: json['title']! as String,
+          price: json['price'] is int ? json['price'] as int : null,
+          count: json['count'] is int ? json['count'] as int : null,
+          desc: json['desc'] is String ? json['desc'] as String : null,
+          pickupTime: json['pickupTime'] is DateTime
+              ? json['pickupTime'] as DateTime
+              : null,
+        );
 }
