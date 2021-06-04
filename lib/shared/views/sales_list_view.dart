@@ -57,7 +57,7 @@ class _SalesListViewState extends State<SalesListView> {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16),
+                                fontSize: 16,),
                           ),
                           SizedBox(
                             height: 45,

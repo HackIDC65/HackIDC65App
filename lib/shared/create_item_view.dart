@@ -27,7 +27,6 @@ class _CreateItemViewState extends State<CreateItemView> {
   String? title;
   int? price;
   String? desc;
-  String? address;
   int? count;
   DateTime? _selectedDay;
   DateTime? _focusedDay;
@@ -211,7 +210,6 @@ class _CreateItemViewState extends State<CreateItemView> {
                   'title': this.title,
                   'price': this.price,
                   'desc': this.desc,
-                  'address': this.address,
                   'count': this.count,
                   'pickupTime': this._selectedDay,
                 };

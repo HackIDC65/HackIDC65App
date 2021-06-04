@@ -43,10 +43,10 @@ class _ViewItemViewState extends State<ViewItemView> {
                       color: Colors.grey,
                       height: double.infinity,
                       width: double.infinity,
-                      child: Image.asset(
-                        'images/sofa_demo.jpg',
+                      child: ((item.images?.length ?? 0) > 0) ? Image.network(
+                        item.images?[0] ?? '',
                         fit: BoxFit.cover,
-                      ),
+                      ) : Container(),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.end,

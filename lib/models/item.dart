@@ -5,6 +5,7 @@ class Item {
   final int? count;
   final String? desc;
   final DateTime? pickupTime;
+  final List<String>? images;
   bool reserved;
 
   Item({
@@ -14,6 +15,7 @@ class Item {
     this.count,
     this.desc,
     this.pickupTime,
+    this.images,
     this.reserved = false,
   });
 
@@ -27,6 +29,7 @@ class Item {
     pickupTime: json['pickupTime'] is DateTime
         ? json['pickupTime'] as DateTime
         : null,
+    images: json["images"] is List<String> ? json["images"] as List<String> : null,
     reserved: json['reserved'] is bool ? json['reserved'] as bool : false,
   );
 }

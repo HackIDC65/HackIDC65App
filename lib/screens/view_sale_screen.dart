@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/sale.dart';
@@ -33,6 +32,7 @@ class _ViewSaleScreenState extends State<ViewSaleScreen> {
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
+        material: (_, __) => MaterialAppBarData(elevation: 0),
         trailingActions: [
           PlatformIconButton(
             icon: Icon(context.platformIcons.add),
@@ -63,54 +63,7 @@ class _ViewSaleScreenState extends State<ViewSaleScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            Column(
-              children: [
-                SizedBox(
-                  height: 100,
-                  child: Stack(children: [
-                    Container(
-                      color: Color(0xff333333),
-                      height: double.infinity,
-                      width: double.infinity,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          'ALL SALES',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        ),
-                        SizedBox(
-                          height: 45,
-                          child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Container(
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFFFBF4),
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(24),
-                                      bottomRight: Radius.circular(24),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
-                  ]),
-                ),
-                Container(
-                    child: Expanded(child: ItemsListView(sale: widget.sale))),
-              ],
-            ),
+            ItemsListView(sale: widget.sale),
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
