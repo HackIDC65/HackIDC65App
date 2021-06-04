@@ -128,9 +128,7 @@ class _CreateItemViewState extends State<CreateItemView> {
                         TextEditingValue(text: title ?? ''),
                       ),
                       onChanged: (value) {
-                        setState(() {
-                          this.title = value;
-                        });
+                        this.title = value;
                       },
                       hintText: AppLocalizations.of(context)?.itemTitleHint,
                     ),
@@ -141,9 +139,7 @@ class _CreateItemViewState extends State<CreateItemView> {
                       ),
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
-                        setState(() {
-                          this.price = int.parse(value);
-                        });
+                        this.price = int.parse(value);
                       },
                       hintText: AppLocalizations.of(context)?.itemPriceHint,
                     ),
@@ -153,9 +149,7 @@ class _CreateItemViewState extends State<CreateItemView> {
                         TextEditingValue(text: desc ?? ''),
                       ),
                       onChanged: (value) {
-                        setState(() {
-                          this.desc = value;
-                        });
+                        this.desc = value;
                       },
                       hintText:
                           AppLocalizations.of(context)?.itemDescriptionHint,
@@ -167,9 +161,7 @@ class _CreateItemViewState extends State<CreateItemView> {
                       ),
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
-                        setState(() {
-                          this.count = int.parse(value);
-                        });
+                        this.count = int.parse(value);
                       },
                       hintText: AppLocalizations.of(context)?.itemCountHint,
                     ),
