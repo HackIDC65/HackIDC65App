@@ -35,6 +35,7 @@ class _CreateItemViewState extends State<CreateItemView> {
   String? title;
   int? price;
   String? desc;
+  String? dimensions;
   int? count;
   DateTime? _selectedDay;
   DateTime? _focusedDay;
@@ -48,6 +49,7 @@ class _CreateItemViewState extends State<CreateItemView> {
     title = widget.item?.title;
     price = widget.item?.price;
     desc = widget.item?.desc;
+    dimensions = widget.item?.dimensions;
     count = widget.item?.count;
     _selectedDay = widget.item?.pickupTime;
     _focusedDay = widget.item?.pickupTime;
@@ -175,7 +177,18 @@ class _CreateItemViewState extends State<CreateItemView> {
                         this.desc = value;
                       },
                       hintText:
-                          AppLocalizations.of(context)?.itemDescriptionHint,
+                      AppLocalizations.of(context)?.itemDescriptionHint,
+                    ),
+                    SizedBox(height: 8),
+                    PlatformTextFormField(
+                      controller: TextEditingController.fromValue(
+                        TextEditingValue(text: dimensions ?? ''),
+                      ),
+                      onChanged: (value) {
+                        this.dimensions = value;
+                      },
+                      hintText:
+                      AppLocalizations.of(context)?.itemDimensionsHint,
                     ),
                     SizedBox(height: 8),
                     PlatformTextFormField(
@@ -235,6 +248,7 @@ class _CreateItemViewState extends State<CreateItemView> {
                   'images': images.map((e) => e.url).toList().where((element) => element != null).toList(),
                   'price': this.price,
                   'desc': this.desc,
+                  'dimensions': this.dimensions,
                   'count': this.count,
                   'pickupTime': this._selectedDay,
                 };

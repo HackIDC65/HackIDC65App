@@ -156,7 +156,7 @@ class _ViewItemViewState extends State<ViewItemView> {
                       _buildField(
                         context,
                         "Dimensions",
-                        widget.item.desc ?? "unknown",
+                        widget.item.dimensions ?? "unknown",
                       ),
                       SizedBox(height: 16),
                       _buildField(context, "Address", "address"),

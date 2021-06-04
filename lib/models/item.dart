@@ -4,6 +4,7 @@ class Item {
   final int? price;
   final int? count;
   final String? desc;
+  final String? dimensions;
   final DateTime? pickupTime;
   final List<String>? images;
   bool reserved;
@@ -14,6 +15,7 @@ class Item {
     this.price,
     this.count,
     this.desc,
+    this.dimensions,
     this.pickupTime,
     this.images,
     this.reserved = false,
@@ -26,6 +28,7 @@ class Item {
     price: json['price'] is int ? json['price'] as int : null,
     count: json['count'] is int ? json['count'] as int : null,
     desc: json['desc'] is String ? json['desc'] as String : null,
+    dimensions: json['dimensions'] is String ? json['dimensions'] as String : null,
     pickupTime: json['pickupTime'] is DateTime
         ? json['pickupTime'] as DateTime
         : null,

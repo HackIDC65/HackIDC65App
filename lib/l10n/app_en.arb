@@ -447,5 +447,10 @@
   "@itemAvailableFromHint": {
     "description": "",
     "type": "text"
+  },
+  "itemDimensionsHint": "Dimensions",
+  "@itemDimensionsHint": {
+    "description": "",
+    "type": "text"
   }
 }
