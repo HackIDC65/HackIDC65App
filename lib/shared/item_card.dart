@@ -19,12 +19,8 @@ class ItemCard extends StatelessWidget {
         Navigator.of(context).push(platformPageRoute(
           context: context,
           builder: (BuildContext context) {
-            return ViewItemScreen(
-              this.item.id,
-              this.sale.id,
-              item: this.item,
-              sale: this.sale
-            );
+            return ViewItemScreen(this.item.id, this.sale.id,
+                item: this.item, sale: this.sale);
           },
         ));
       },
