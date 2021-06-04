@@ -26,49 +26,50 @@ class ItemCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: Color(0xffFFFBF4),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 0.5,
               blurRadius: 3,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: Offset(0, 3),
             ),
           ],
+          image: DecorationImage(
+              image: NetworkImage(item.images?[0] ?? ''), fit: BoxFit.cover),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: (item.images?.length ?? 0) > 0
-                    ? Image.network(
-                        item.images?[0] ?? '',
-                        fit: BoxFit.cover,
-                      )
-                    : Container(
-                        color: Color(0xff333333),
-                      ),
-              ),
-              Positioned(
-                  top: 20,
-                  left: 0,
-                  child: Container(
-                    color: Color(0xD968DB46),
-                    padding: EdgeInsets.fromLTRB(35, 3, 8, 3),
-                    child: Text(
-                        item.price == 0
+        child: Stack(children: [
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.4),
+                borderRadius: BorderRadius.circular(20)),
+          ),
+          Positioned(
+              bottom: 10.0,
+              left: 10.0,
+              child: Text(
+                item.title.toString(),
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600),
+              )),
+          Positioned(
+              top: 30,
+              left: 0,
+              child: Container(
+                color: Color(0xE668DB46),
+                padding: EdgeInsets.fromLTRB(25, 3, 8, 3),
+                child: Text(
+                    item.price == 0
+                        ? 'Free!'
+                        : item.price == null
                             ? 'Free!'
-                            : item.price == null
-                                ? 'Free!'
-                                : '₪${item.price?.toString()}',
-                        style: Theme.of(context).textTheme.headline5),
-                  )),
-            ]),
-          ],
-        ),
+                            : '₪${item.price?.toString()}',
+                    style: Theme.of(context).textTheme.headline5),
+              )),
+        ]),
       ),
     );
   }
