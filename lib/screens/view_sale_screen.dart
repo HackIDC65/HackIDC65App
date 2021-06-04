@@ -5,6 +5,7 @@ import 'package:flutter_app/screens/create_item_screen.dart';
 import 'package:flutter_app/shared/filled_button.dart';
 import 'package:flutter_app/shared/items_list_view.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:share/share.dart';
 
 class ViewSaleScreen extends StatefulWidget {
   String id;
@@ -33,6 +34,12 @@ class _ViewSaleScreenState extends State<ViewSaleScreen> {
         ),
         material: (_, __) => MaterialAppBarData(elevation: 0),
         trailingActions: [
+          PlatformIconButton(
+            icon: Icon(context.platformIcons.share),
+            onPressed: () {
+              Share.share('Check out my new sale https://sales-now.com/${widget.sale.id}');
+            },
+          ),
           PlatformIconButton(
             icon: Icon(context.platformIcons.add),
             onPressed: () {
