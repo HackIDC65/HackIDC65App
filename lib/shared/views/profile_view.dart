@@ -36,10 +36,13 @@ class _ProfileViewState extends State<ProfileView> {
               margin: EdgeInsets.all(20),
               height: 200.0,
               width: 200.0,
+              decoration: BoxDecoration(
+                  border: Border.all(width: 3, color: Colors.white),
+                  borderRadius: BorderRadius.circular(100)),
               child: ClipRRect(
                 child: _image != null
                     ? Image.file(_image!, fit: BoxFit.fill)
-                    : Image.network(
+                    : Image.asset(
                         'graphics/ari.jpeg',
                         fit: BoxFit.cover,
                       ),
