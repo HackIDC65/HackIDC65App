@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/sale.dart';
+import 'package:flutter_app/shared/filled_button.dart';
 import 'package:flutter_app/shared/sale_card.dart';
 
 class SalesListView extends StatefulWidget {
@@ -12,7 +13,8 @@ class SalesListView extends StatefulWidget {
 }
 
 class _SalesListViewState extends State<SalesListView> {
-  final Stream<QuerySnapshot> _salesStream = FirebaseFirestore.instance.collection('sales').snapshots();
+  final Stream<QuerySnapshot> _salesStream =
+      FirebaseFirestore.instance.collection('sales').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +30,85 @@ class _SalesListViewState extends State<SalesListView> {
         }
 
         var salesList = snapshot.data?.docs.map((DocumentSnapshot document) {
-          return Sale.fromJson(document.id, document.data()! as Map<String, Object?>);
-        }).toList() ?? [];
+              return Sale.fromJson(
+                  document.id, document.data()! as Map<String, Object?>);
+            }).toList() ??
+            [];
 
-        return ListView.builder(
-          itemBuilder: (context, index) {
-            return SaleCard(salesList[index]);
-          },
-          padding: const EdgeInsets.all(10),
-          itemCount: salesList.length,
+        return Stack(
+          children: [
+            Column(
+              children: [
+                SizedBox(
+                  height: 100,
+                  child: Stack(children: [
+                    Container(
+                      color: Color(0xff333333),
+                      height: double.infinity,
+                      width: double.infinity,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'ALL SALES',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
+                        SizedBox(
+                          height: 45,
+                          child: Stack(
+                            children: [
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  height: 32,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffFFFBF4),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(24),
+                                      topRight: Radius.circular(24),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                  ]),
+                ),
+                Container(
+                  child: Expanded(
+                      child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return SaleCard(salesList[index]);
+                    },
+                    padding: const EdgeInsets.all(10),
+                    itemCount: salesList.length,
+                  )),
+                )
+              ],
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: FilledButton.text(
+                  'NEW SALE',
+                  width: double.infinity,
+                  onPressed: () {
+                    print('clicked');
+                  },
+                ),
+              ),
+            )
+          ],
         );
       },
     );
   }
 }
-

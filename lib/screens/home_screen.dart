@@ -21,7 +21,19 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: PlatformAppBar(
         cupertino: (_, __) =>
             CupertinoNavigationBarData(transitionBetweenRoutes: false),
-        title: Text("HackIDC65"),
+        title: Text(
+          "Hello, Ari!",
+        ),
+        trailingActions: [
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: PlatformIconButton(
+                icon: Icon(
+              Icons.notifications_none_outlined,
+              color: Colors.white,
+            )),
+          )
+        ],
         // trailingActions: <Widget>[
         //   PlatformIconButton(
         //     padding: EdgeInsets.zero,
