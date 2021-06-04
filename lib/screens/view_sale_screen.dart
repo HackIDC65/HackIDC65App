@@ -43,7 +43,20 @@ class _ViewSaleScreenState extends State<ViewSaleScreen> {
                 },
               ));
             },
-          )
+          ),
+          Container(
+              alignment: Alignment.centerRight,
+              child: PopupMenuButton(
+                itemBuilder: (BuildContext context) {
+                  return {'Edit', 'Delete'}.map((String choice) {
+                    return PopupMenuItem<String>(
+                      value: choice,
+                      child: Text(choice),
+                    );
+                  }).toList();
+                },
+              )
+          ),
         ],
       ),
       backgroundColor: const Color(0xfffffbf4),

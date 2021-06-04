@@ -32,17 +32,17 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
         ),
         trailingActions: [
           Container(
-            alignment: Alignment.topRight,
-            child: PopupMenuButton(
-              itemBuilder: (BuildContext context) {
-                return {'Edit', 'Delete'}.map((String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              },
-            ),
+              alignment: Alignment.centerRight,
+              child: PopupMenuButton(
+                itemBuilder: (BuildContext context) {
+                  return {'Edit', 'Delete'}.map((String choice) {
+                    return PopupMenuItem<String>(
+                      value: choice,
+                      child: Text(choice),
+                    );
+                  }).toList();
+                },
+              )
           ),
         ],
       ),
