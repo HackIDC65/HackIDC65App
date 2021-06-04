@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
 import 'package:flutter_app/models/sale.dart';
@@ -63,6 +64,13 @@ class _CreateItemViewState extends State<CreateItemView> {
                       onAddImageClicked: () {
                         getImage(context, (pickedFile) {
                           setState(() {
+                            if (pickedFile != null) {
+                              firebase_storage.Reference ref =
+                              firebase_storage.FirebaseStorage.instance.ref();
+                              ref.putFile(File(pickedFile.path))
+                                  .then((a) => ref.getDownloadURL())
+                                  .then((url) => print(url));
+                            }
                             if (pickedFile != null) {
                               images.add(File(pickedFile.path));
                             } else {
