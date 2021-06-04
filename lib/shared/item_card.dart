@@ -25,15 +25,9 @@ class ItemCard extends StatelessWidget {
         ));
       },
       child: Container(
-        margin: EdgeInsets.only(bottom: 20.0),
-        padding: EdgeInsets.fromLTRB(3, 3, 3, 15),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(5),
-              topRight: Radius.circular(5),
-              bottomLeft: Radius.circular(5),
-              bottomRight: Radius.circular(5)),
+          borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
@@ -46,22 +40,24 @@ class ItemCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-                child: Stack(children: [
-              IntrinsicWidth(
-                child: Image.asset(
-                  'images/sofa_demo.jpg',
-                  height: 160,
-                  width: 1500,
-                  fit: BoxFit.cover,
-                ),
+            Stack(children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: (item.images?.length ?? 0) > 0
+                    ? Image.network(
+                        item.images?[0] ?? '',
+                        fit: BoxFit.cover,
+                      )
+                    : Container(
+                        color: Color(0xff333333),
+                      ),
               ),
               Positioned(
-                  bottom: 20,
-                  right: 0,
+                  top: 20,
+                  left: 0,
                   child: Container(
-                    color: Colors.lightGreenAccent.withOpacity(0.85),
-                    padding: EdgeInsets.fromLTRB(8, 3, 35, 3),
+                    color: Color(0xD968DB46),
+                    padding: EdgeInsets.fromLTRB(35, 3, 8, 3),
                     child: Text(
                         item.price == 0
                             ? 'Free!'
@@ -70,46 +66,7 @@ class ItemCard extends StatelessWidget {
                                 : '₪${item.price?.toString()}',
                         style: Theme.of(context).textTheme.headline5),
                   )),
-            ])),
-            Container(
-              margin: EdgeInsets.fromLTRB(12, 10, 12, 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: Text(item.title ?? '',
-                            style: Theme.of(context).textTheme.headline4),
-                      ),
-                      Container(
-                        child: Text(
-                          item.desc ?? '',
-                          style: Theme.of(context).textTheme.bodyText1,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                        ),
-                        width: 400,
-                      ),
-                    ],
-                  ),
-                  Container(
-                      alignment: Alignment.topRight,
-                      child: PopupMenuButton(
-                        itemBuilder: (BuildContext context) {
-                          return {'Edit', 'Delete'}.map((String choice) {
-                            return PopupMenuItem<String>(
-                              value: choice,
-                              child: Text(choice),
-                            );
-                          }).toList();
-                        },
-                      )),
-                ],
-              ),
-            ),
+            ]),
           ],
         ),
       ),

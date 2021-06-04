@@ -25,7 +25,6 @@ class _ViewSaleScreenState extends State<ViewSaleScreen> {
   Widget build(BuildContext context) {
     return PlatformScaffold(
       appBar: PlatformAppBar(
-        title: Text(widget.sale.title),
         leading: Builder(
           builder: (context) => PlatformIconButton(
             icon: Image.asset("graphics/ic_back.png"),
@@ -69,10 +68,15 @@ class _ViewSaleScreenState extends State<ViewSaleScreen> {
               child: Padding(
                 padding: EdgeInsets.all(20),
                 child: FilledButton.text(
-                  'NEW SALE',
+                  'ADD ITEM',
                   width: double.infinity,
                   onPressed: () {
-                    print('clicked');
+                    Navigator.of(context).push(platformPageRoute(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CreateItemScreen(item: null, sale: widget.sale);
+                      },
+                    ));
                   },
                 ),
               ),

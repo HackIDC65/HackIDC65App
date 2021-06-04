@@ -31,65 +31,75 @@ class _ItemsListViewState extends State<ItemsListView> {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
+          return Text("Loading...");
         }
 
         var itemsList = snapshot.data?.docs.map((DocumentSnapshot document) {
-          return Item.fromJson(document.id, document.data()! as Map<String, Object?>);
-        }).toList() ?? [];
-
-        return ListView.builder(
-          itemBuilder: (context, index) {
-            if (index == 0) return SizedBox(
-              height: 150,
-              child: Stack(children: [
-                Container(
-                  color: Color(0xff333333),
-                  height: double.infinity,
-                  width: double.infinity,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'ALL SALES',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      child: SizedBox(
-                        height: 32,
-                        child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Container(
-                                height: 32,
-                                decoration: BoxDecoration(
-                                  color: Color(0xff333333),
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(24),
-                                    bottomRight: Radius.circular(24),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ]),
-            );
-            return ItemCard(item: itemsList[index - 1], sale: widget.sale);
+              return Item.fromJson(
+                  document.id, document.data()! as Map<String, Object?>);
+            }).toList() ??
+            [];
+        return GridView.builder(
+          itemBuilder: (_, index) {
+            return ItemCard(item: itemsList[index], sale: widget.sale);
           },
-          itemCount: itemsList.length + 1,
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemCount: itemsList.length,
         );
+        // return ListView.builder(
+        //   itemBuilder: (context, index) {
+        //     if (index == 0)
+        //       return SizedBox(
+        //         height: 150,
+        //         child: Stack(children: [
+        //           Container(
+        //             color: Color(0xff333333),
+        //             height: double.infinity,
+        //             width: double.infinity,
+        //           ),
+        //           Column(
+        //             mainAxisAlignment: MainAxisAlignment.end,
+        //             children: [
+        //               Text(
+        //                 widget.sale.title,
+        //                 style: TextStyle(
+        //                   color: Colors.white,
+        //                   fontWeight: FontWeight.bold,
+        //                   fontSize: 28,
+        //                 ),
+        //               ),
+        //               Container(
+        //                 color: Colors.white,
+        //                 child: SizedBox(
+        //                   height: 32,
+        //                   child: Stack(
+        //                     children: [
+        //                       Align(
+        //                         alignment: Alignment.topCenter,
+        //                         child: Container(
+        //                           height: 32,
+        //                           decoration: BoxDecoration(
+        //                             color: Color(0xff333333),
+        //                             borderRadius: BorderRadius.only(
+        //                               bottomLeft: Radius.circular(24),
+        //                               bottomRight: Radius.circular(24),
+        //                             ),
+        //                           ),
+        //                         ),
+        //                       ),
+        //                     ],
+        //                   ),
+        //                 ),
+        //               ),
+        //             ],
+        //           )
+        //         ]),
+        //       );
+        //     return ItemCard(item: itemsList[index - 1], sale: widget.sale);
+        //   },
+        //   itemCount: itemsList.length + 1,
+        // );
       },
     );
   }
