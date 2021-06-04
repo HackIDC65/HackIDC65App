@@ -42,12 +42,12 @@ class ItemCard extends StatelessWidget {
         child: Stack(children: [
           Container(
             decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.4),
+                color: Color(0xbf333333),
                 borderRadius: BorderRadius.circular(20)),
           ),
           Positioned(
-              bottom: 10.0,
-              left: 10.0,
+              bottom: 14.0,
+              left: 14.0,
               child: Text(
                 item.title.toString(),
                 style: TextStyle(
