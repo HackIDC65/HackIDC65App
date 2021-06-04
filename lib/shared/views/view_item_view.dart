@@ -43,10 +43,12 @@ class _ViewItemViewState extends State<ViewItemView> {
                       color: Colors.grey,
                       height: double.infinity,
                       width: double.infinity,
-                      child: ((item.images?.length ?? 0) > 0) ? Image.network(
-                        item.images?[0] ?? '',
-                        fit: BoxFit.cover,
-                      ) : Container(),
+                      child: ((item.images?.length ?? 0) > 0)
+                          ? Image.network(
+                              item.images?[0] ?? '',
+                              fit: BoxFit.cover,
+                            )
+                          : Container(),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -69,12 +71,16 @@ class _ViewItemViewState extends State<ViewItemView> {
                                 ),
                               ),
                               if (widget.item.reserved)
-                                Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 32),
-                                  child: CustomChip(
-                                    "Reserved",
-                                    color: Colors.red,
-                                    textColor: Colors.white,
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
+                                    child: CustomChip(
+                                      "Reserved",
+                                      color: Colors.red,
+                                      textColor: Colors.white,
+                                    ),
                                   ),
                                 ),
                             ],
@@ -93,31 +99,27 @@ class _ViewItemViewState extends State<ViewItemView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Wrap(children: [
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
                                 Text(
                                   widget.item.title ?? "no title",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline4
                                       ?.copyWith(fontSize: 28.0),
-                                )
-                              ]),
-                              SizedBox(height: 8),
-                              Wrap(
-                                children: [
-                                  Text(
-                                    widget.item.desc ?? "No description...",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6
-                                        ?.copyWith(fontSize: 20.0),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  widget.item.desc ?? "No description...",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      ?.copyWith(fontSize: 20.0),
+                                ),
+                              ],
+                            ),
                           ),
                           Text(
                             widget.item.price == 0
@@ -128,30 +130,35 @@ class _ViewItemViewState extends State<ViewItemView> {
                             style:
                                 Theme.of(context).textTheme.headline4?.copyWith(
                                       fontSize: 30.0,
-                                      color: const Color(0xff19BD2E),
+                                      color: widget.item.reserved
+                                          ? Colors.grey
+                                          : const Color(0xff19BD2E),
+                                      decoration: widget.item.reserved
+                                          ? TextDecoration.lineThrough
+                                          : null,
                                     ),
                           )
                         ],
                       ),
-                      SizedBox(height: 50),
+                      SizedBox(height: 32),
                       _buildField(
                         context,
                         "Available From",
                         widget.item.pickupTime?.toString() ?? "unknown",
                       ),
-                      SizedBox(height: 37),
+                      SizedBox(height: 16),
                       _buildField(
                         context,
                         "Quantity",
                         (widget.item.count ?? 1).toString(),
                       ),
-                      SizedBox(height: 37),
+                      SizedBox(height: 16),
                       _buildField(
                         context,
                         "Dimensions",
                         widget.item.desc ?? "unknown",
                       ),
-                      SizedBox(height: 37),
+                      SizedBox(height: 16),
                       _buildField(context, "Address", "address"),
                       SizedBox(height: 100),
                     ],
@@ -170,6 +177,8 @@ class _ViewItemViewState extends State<ViewItemView> {
                   children: [
                     FilledButton(
                       height: 42,
+                      width: 42,
+                      padding: EdgeInsets.zero,
                       child: Icon(Icons.call),
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5),
@@ -178,14 +187,23 @@ class _ViewItemViewState extends State<ViewItemView> {
                         print(widget.item.id + ' was Reserved');
                       },
                     ),
-                    SizedBox(width: 24),
+                    SizedBox(width: 16),
                     Expanded(
                       child: FilledButton(
                         child: Text(
-                          'Reserve Now!',
-                          style: Theme.of(context).textTheme.headline5,
+                          widget.item.reserved
+                              ? 'Reserved 0_0'
+                              : 'Reserve Now!',
+                          style:
+                              Theme.of(context).textTheme.headline5?.copyWith(
+                                    color: widget.item.reserved
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
                         ),
-                        color: widget.item.reserved ? Colors.grey : const Color(0Xffffbf00),
+                        color: widget.item.reserved
+                            ? Colors.grey
+                            : const Color(0Xffffbf00),
                         onPressed: () {
                           CollectionReference items = FirebaseFirestore.instance
                               .collection('sales')
@@ -222,7 +240,9 @@ class _ViewItemViewState extends State<ViewItemView> {
                 fontWeight: FontWeight.normal,
               ),
         ),
-        Divider(),
+        Divider(
+          thickness: 2,
+        ),
         Text(
           value ?? "",
           style: Theme.of(context).textTheme.headline4?.copyWith(
