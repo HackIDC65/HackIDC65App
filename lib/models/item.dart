@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Item {
   final String id;
   final String? title;
@@ -29,8 +31,8 @@ class Item {
     count: json['count'] is int ? json['count'] as int : null,
     desc: json['desc'] is String ? json['desc'] as String : null,
     dimensions: json['dimensions'] is String ? json['dimensions'] as String : null,
-    pickupTime: json['pickupTime'] is DateTime
-        ? json['pickupTime'] as DateTime
+    pickupTime: json['pickupTime'] is Timestamp
+        ? (json['pickupTime'] as Timestamp).toDate()
         : null,
     images: json["images"] is List ? (json["images"] as List).map((e) => e as String).toList() : null,
     reserved: json['reserved'] is bool ? json['reserved'] as bool : false,

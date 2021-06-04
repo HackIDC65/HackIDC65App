@@ -107,11 +107,11 @@ class _CreateItemViewState extends State<CreateItemView> {
                                     ? Center(child: Loader())
                                     : (images[0].file != null
                                         ? Image.file(
-                                            images[0]!.file!,
+                                            images[0].file!,
                                             fit: BoxFit.fitWidth,
                                           )
                                         : Image.network(
-                                            images[0]!.url!,
+                                            images[0].url!,
                                             fit: BoxFit.fitWidth,
                                           ))),
                       ),

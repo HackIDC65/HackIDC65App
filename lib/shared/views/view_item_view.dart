@@ -5,6 +5,7 @@ import 'package:flutter_app/models/item.dart';
 import 'package:flutter_app/models/sale.dart';
 import 'package:flutter_app/shared/custom_chip.dart';
 import 'package:flutter_app/shared/filled_button.dart';
+import 'package:intl/intl.dart';
 
 class ViewItemView extends StatefulWidget {
   final Item item;
@@ -18,6 +19,7 @@ class ViewItemView extends StatefulWidget {
 
 class _ViewItemViewState extends State<ViewItemView> {
   late Item item;
+  late Sale sale;
 
   @override
   void didChangeDependencies() {
@@ -25,6 +27,7 @@ class _ViewItemViewState extends State<ViewItemView> {
     super.didChangeDependencies();
 
     this.item = widget.item;
+    this.sale = widget.sale;
   }
 
   @override
@@ -144,7 +147,7 @@ class _ViewItemViewState extends State<ViewItemView> {
                       _buildField(
                         context,
                         "Available From",
-                        widget.item.pickupTime?.toString() ?? "unknown",
+                        widget.item.pickupTime != null ? DateFormat.yMMMMd().format(widget.item.pickupTime!) : "unknown",
                       ),
                       SizedBox(height: 16),
                       _buildField(
@@ -159,7 +162,11 @@ class _ViewItemViewState extends State<ViewItemView> {
                         widget.item.dimensions ?? "unknown",
                       ),
                       SizedBox(height: 16),
-                      _buildField(context, "Address", "address"),
+                      _buildField(
+                          context,
+                          "Address",
+                          widget.sale.location,
+                      ),
                       SizedBox(height: 100),
                     ],
                   ),
