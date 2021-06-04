@@ -9,6 +9,7 @@ import 'package:flutter_app/shared/gallery.dart';
 import 'package:flutter_app/utils/get_image.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class CreateItemView extends StatefulWidget {
   final Item? item;
@@ -27,7 +28,8 @@ class _CreateItemViewState extends State<CreateItemView> {
   String? desc;
   String? address;
   int? count;
-  DateTime? pickupTime;
+  DateTime? _selectedDay;
+  DateTime? _focusedDay;
 
   @override
   void didChangeDependencies() {
@@ -39,7 +41,8 @@ class _CreateItemViewState extends State<CreateItemView> {
     price = widget.item?.price;
     desc = widget.item?.desc;
     count = widget.item?.count;
-    pickupTime = widget.item?.pickupTime;
+    _selectedDay = widget.item?.pickupTime;
+    _focusedDay = widget.item?.pickupTime;
   }
 
   @override
@@ -155,17 +158,22 @@ class _CreateItemViewState extends State<CreateItemView> {
                       hintText: AppLocalizations.of(context)?.itemCountHint,
                     ),
                     SizedBox(height: 8),
-                    PlatformTextFormField(
-                      controller: TextEditingController.fromValue(
-                        TextEditingValue(text: count?.toString() ?? ''),
-                      ),
-                      onChanged: (value) {
+                    TableCalendar(
+                      selectedDayPredicate: (day) {
+                        return isSameDay(_selectedDay, day);
+                      },
+                      firstDay: DateTime.utc(2020, 1, 1),
+                      lastDay: DateTime.utc(2030, 3, 14),
+                      focusedDay: _focusedDay ?? DateTime.now(),
+                      onDaySelected: (selectedDay, focusedDay) {
                         setState(() {
-                          this.pickupTime = DateTime.parse(value);
+                          _selectedDay = selectedDay;
+                          _focusedDay = focusedDay;
                         });
                       },
-                      hintText:
-                          AppLocalizations.of(context)?.itemAvailableFromHint,
+                      onPageChanged: (focusedDay) {
+                        _focusedDay = focusedDay;
+                      },
                     ),
                   ],
                 ),
@@ -180,8 +188,8 @@ class _CreateItemViewState extends State<CreateItemView> {
             padding: const EdgeInsets.only(bottom: 32, left: 32, right: 32),
             child: FilledButton.text(
               (widget.item != null
-                  ? AppLocalizations.of(context)?.saveItem
-                  : AppLocalizations.of(context)?.createItem) ??
+                      ? AppLocalizations.of(context)?.saveItem
+                      : AppLocalizations.of(context)?.createItem) ??
                   "",
               width: double.infinity,
               onPressed: () async {
@@ -197,7 +205,7 @@ class _CreateItemViewState extends State<CreateItemView> {
                   'desc': this.desc,
                   'address': this.address,
                   'count': this.count,
-                  'pickupTime': this.pickupTime,
+                  'pickupTime': this._selectedDay,
                 };
                 if (id != null) {
                   await items.doc(id).set(delta);
