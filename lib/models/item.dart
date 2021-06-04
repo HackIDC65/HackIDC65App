@@ -29,7 +29,7 @@ class Item {
     pickupTime: json['pickupTime'] is DateTime
         ? json['pickupTime'] as DateTime
         : null,
-    images: json["images"] is List<String> ? json["images"] as List<String> : null,
+    images: json["images"] is List ? (json["images"] as List).map((e) => e as String).toList() : null,
     reserved: json['reserved'] is bool ? json['reserved'] as bool : false,
   );
 }
