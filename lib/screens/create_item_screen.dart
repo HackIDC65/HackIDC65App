@@ -20,6 +20,7 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
   Widget build(BuildContext context) {
     return PlatformScaffold(
       appBar: PlatformAppBar(
+        material: (_, __) => MaterialAppBarData(elevation: 0),
         leading: Builder(
           builder: (context) => PlatformIconButton(
             icon: Image.asset("graphics/ic_back.png"),

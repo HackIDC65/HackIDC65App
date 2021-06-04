@@ -61,9 +61,8 @@ class _CreateItemViewState extends State<CreateItemView> {
                     color: Color(0xff333333),
                     height: double.infinity,
                     width: double.infinity,
-                    child: Gallery(
-                      images: images,
-                      onAddImageClicked: () {
+                    child: GestureDetector(
+                      onTap: () {
                         getImage(context, (pickedFile) {
                           setState(() {
                             if (pickedFile != null) {
@@ -81,6 +80,16 @@ class _CreateItemViewState extends State<CreateItemView> {
                           });
                         });
                       },
+                      child: Container(
+                        child: images.length == 0 ? Center(child: Icon(
+                          Icons.photo_camera_outlined,
+                          size: 60,
+                          color: Colors.white,
+                        )) : Image.file(
+                          images[0]!,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
                     ),
                   ),
                   Column(
