@@ -27,7 +27,7 @@ class ItemCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Color(0xffFFFBF4),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.6),
@@ -43,7 +43,7 @@ class ItemCard extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 color: Color(0x99333333),
-                borderRadius: BorderRadius.circular(20)),
+                borderRadius: BorderRadius.circular(10)),
           ),
           Positioned(
             top: 18.0,

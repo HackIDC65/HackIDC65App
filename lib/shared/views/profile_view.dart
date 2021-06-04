@@ -18,6 +18,7 @@ class _ProfileViewState extends State<ProfileView> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      color: Color(0xff333333),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -38,50 +39,54 @@ class _ProfileViewState extends State<ProfileView> {
               child: ClipRRect(
                 child: _image != null
                     ? Image.file(_image!, fit: BoxFit.fill)
-                    : Image.network('graphics/anonymous_user.png',
-                        fit: BoxFit.fill),
+                    : Image.network(
+                        'graphics/ari.jpeg',
+                        fit: BoxFit.cover,
+                      ),
                 borderRadius: BorderRadius.circular(100),
               ),
             ),
           ),
-          Card(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ListTile(
-                  title: Text("Israel Israeli",
-                      style: TextStyle(fontWeight: FontWeight.w500)),
-                  leading: Icon(
-                    Icons.person,
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 6, 20, 6),
+            child: Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ListTile(
+                    title: Text("Ariel Fogelman",
+                        style: TextStyle(fontWeight: FontWeight.w500)),
+                    leading: Icon(
+                      Icons.person,
+                    ),
                   ),
-                ),
-                ListTile(
-                  title: Text("Tel Aviv, Israel",
-                      style: TextStyle(fontWeight: FontWeight.w500)),
-                  leading: Icon(
-                    Icons.place,
+                  ListTile(
+                    title: Text("Herzliya, Israel",
+                        style: TextStyle(fontWeight: FontWeight.w500)),
+                    leading: Icon(
+                      Icons.place,
+                    ),
                   ),
-                ),
-                ListTile(
-                  title: Text("+972-541234567",
-                      style: TextStyle(fontWeight: FontWeight.w500)),
-                  leading: Icon(
-                    Icons.phone,
+                  ListTile(
+                    title: Text("+972-54-123-4567",
+                        style: TextStyle(fontWeight: FontWeight.w500)),
+                    leading: Icon(
+                      Icons.phone,
+                    ),
                   ),
-                ),
-                ListTile(
-                  title: Text("israel@israeli.com",
-                      style: TextStyle(fontWeight: FontWeight.w500)),
-                  leading: Icon(
-                    Icons.email,
+                  ListTile(
+                    title: Text("ari@thisisnotamail.com",
+                        style: TextStyle(fontWeight: FontWeight.w500)),
+                    leading: Icon(
+                      Icons.email,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
       ),
     );
   }
-
 }
