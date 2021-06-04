@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
 import 'package:flutter_app/models/sale.dart';
 import 'package:flutter_app/shared/filled_button.dart';
-import 'package:flutter_app/shared/gallery.dart';
+import 'package:flutter_app/shared/loader.dart';
 import 'package:flutter_app/utils/get_image.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -22,8 +22,16 @@ class CreateItemView extends StatefulWidget {
   _CreateItemViewState createState() => _CreateItemViewState();
 }
 
+class ImageHolder {
+  final String? url;
+  final File? file;
+
+  const ImageHolder({this.file, this.url});
+}
+
 class _CreateItemViewState extends State<CreateItemView> {
-  List images = [];
+  List<ImageHolder> images = [];
+  bool loadingImage = false;
   String? title;
   int? price;
   String? desc;
@@ -64,31 +72,46 @@ class _CreateItemViewState extends State<CreateItemView> {
                     child: GestureDetector(
                       onTap: () {
                         getImage(context, (pickedFile) {
-                          setState(() {
-                            if (pickedFile != null) {
-                              firebase_storage.Reference ref =
-                              firebase_storage.FirebaseStorage.instance.ref();
-                              ref.putFile(File(pickedFile.path))
-                                  .then((a) => ref.getDownloadURL())
-                                  .then((url) => print(url));
-                            }
-                            if (pickedFile != null) {
-                              images.add(File(pickedFile.path));
-                            } else {
-                              print('No image selected.');
-                            }
-                          });
+                          if (pickedFile != null) {
+                            setState(() {
+                              loadingImage = true;
+                            });
+                            firebase_storage.Reference ref = firebase_storage
+                                .FirebaseStorage.instance
+                                .ref("${DateTime.now()}.png");
+                            ref.putFile(File(pickedFile.path)).then((a) {
+                              return ref.getDownloadURL();
+                            }).then((url) {
+                              setState(() {
+                                images.add(ImageHolder(
+                                  file: File(pickedFile.path),
+                                  url: url,
+                                ));
+                                loadingImage = false;
+                              });
+                            });
+                          }
                         });
                       },
                       child: Container(
-                        child: images.length == 0 ? Center(child: Icon(
-                          Icons.photo_camera_outlined,
-                          size: 60,
-                          color: Colors.white,
-                        )) : Image.file(
-                          images[0]!,
-                          fit: BoxFit.fitWidth,
-                        ),
+                        child: loadingImage ? Center(child: Loader()) : (images.length == 0
+                                ? Center(
+                                    child: Icon(
+                                    Icons.photo_camera_outlined,
+                                    size: 60,
+                                    color: Colors.white,
+                                  ))
+                                : loadingImage
+                                    ? Center(child: Loader())
+                                    : (images[0].file != null
+                                        ? Image.file(
+                                            images[0]!.file!,
+                                            fit: BoxFit.fitWidth,
+                                          )
+                                        : Image.network(
+                                            images[0]!.url!,
+                                            fit: BoxFit.fitWidth,
+                                          ))),
                       ),
                     ),
                   ),
@@ -209,6 +232,7 @@ class _CreateItemViewState extends State<CreateItemView> {
 
                 var delta = {
                   'title': this.title,
+                  'images': images.map((e) => e.url).toList().where((element) => element != null).toList(),
                   'price': this.price,
                   'desc': this.desc,
                   'count': this.count,
