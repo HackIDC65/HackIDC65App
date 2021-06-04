@@ -34,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
             )),
           )
         ],
+        material: (_, __) => MaterialAppBarData(elevation: 0),
         // trailingActions: <Widget>[
         //   PlatformIconButton(
         //     padding: EdgeInsets.zero,
