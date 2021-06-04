@@ -62,25 +62,25 @@ class _HomeScreenState extends State<HomeScreen> {
       // unselectedItemColor: Colors.grey,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xff333333),
           icon: Icon(context.platformIcons.home, color: Colors.grey),
           activeIcon: Icon(context.platformIcons.home, color: Colors.white),
           label: AppLocalizations.of(context)!.discoverBurgers,
         ),
         BottomNavigationBarItem(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xff333333),
           icon: Icon(context.platformIcons.bookmark, color: Colors.grey),
           activeIcon: Icon(context.platformIcons.bookmark, color: Colors.white),
           label: AppLocalizations.of(context)!.discoverQuests,
         ),
         BottomNavigationBarItem(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xff333333),
           icon: Icon(context.platformIcons.search, color: Colors.grey),
           activeIcon: Icon(context.platformIcons.search, color: Colors.white),
           label: AppLocalizations.of(context)!.discoverLists,
         ),
         BottomNavigationBarItem(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xff333333),
           icon: Icon(context.platformIcons.personOutline, color: Colors.grey),
           activeIcon:
               Icon(context.platformIcons.personOutline, color: Colors.white),
@@ -89,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
       currentIndex: _selectedIndex,
       itemChanged: _onItemTapped,
+      backgroundColor: const Color(0xff333333),
     );
   }
 }

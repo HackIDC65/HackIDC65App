@@ -1,18 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
+import 'package:flutter_app/models/sale.dart';
 import 'package:flutter_app/shared/views/view_item_view.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ViewItemScreen extends StatefulWidget {
   String id;
+  String saleId;
   Item item;
+  Sale sale;
 
-  ViewItemScreen(this.id, {required this.item});
-
-  ViewItemScreen.item(Item fullItem)
-      : this.id = fullItem.id,
-        this.item = fullItem;
+  ViewItemScreen(this.id, this.saleId, {required this.item, required this.sale});
 
   @override
   _ViewItemScreenState createState() => _ViewItemScreenState();
@@ -48,7 +47,7 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
       ),
       backgroundColor: const Color(0xfffffbf4),
       body: SafeArea(
-        child: ViewItemView(widget.item),
+        child: ViewItemView(widget.item, widget.sale),
       ),
     );
   }

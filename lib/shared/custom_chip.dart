@@ -28,17 +28,17 @@ class CustomChip extends StatelessWidget {
         minSize: 0,
         onPressed: () {},
         color: color,
-        borderRadius: BorderRadius.all(Radius.circular(3)),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
       );
     }
     return Chip(
       label: text,
-      padding: EdgeInsets.all(0),
+      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 0),
       labelPadding: EdgeInsets.only(left: 4, right: 4, top: -3, bottom: -3),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       backgroundColor: color,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(3)),
+        borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     );
   }

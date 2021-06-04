@@ -37,7 +37,7 @@ class Gallery extends StatelessWidget {
           ),
         ),
         decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.5),
+          color: Color(0xff333333),
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
@@ -68,14 +68,18 @@ class Gallery extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Center(
-              child: Icon(Icons.add),
+              child: Icon(
+                Icons.photo_camera_outlined,
+                size: 60,
+                color: Colors.white,
+              ),
             ),
             onPressed: () {
               if (this.onAddImageClicked != null) this.onAddImageClicked!();
             },
           ),
           decoration: BoxDecoration(
-            color: Colors.grey.withOpacity(0.5),
+            color: Color(0xff333333),
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
                 topRight: Radius.circular(10),
@@ -83,7 +87,7 @@ class Gallery extends StatelessWidget {
                 bottomRight: Radius.circular(10)),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Color(0xff333333),
                 spreadRadius: 5,
                 blurRadius: 7,
                 offset: Offset(0, 3), // changes position of shadow

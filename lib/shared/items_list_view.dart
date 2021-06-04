@@ -39,7 +39,7 @@ class _ItemsListViewState extends State<ItemsListView> {
 
         return ListView.builder(
           itemBuilder: (context, index) {
-            return ItemCard(item: itemsList[index]);
+            return ItemCard(item: itemsList[index], sale: widget.sale);
           },
           padding: const EdgeInsets.all(10),
           itemCount: itemsList.length,
