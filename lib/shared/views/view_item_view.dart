@@ -107,7 +107,7 @@ class _ViewItemViewState extends State<ViewItemView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  widget.item.title ?? "no title",
+                                  widget.item.title ?? "Missing Title",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline4
@@ -115,7 +115,7 @@ class _ViewItemViewState extends State<ViewItemView> {
                                 ),
                                 SizedBox(height: 8),
                                 Text(
-                                  widget.item.desc ?? "No description...",
+                                  widget.item.desc ?? "",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6
@@ -147,7 +147,10 @@ class _ViewItemViewState extends State<ViewItemView> {
                       _buildField(
                         context,
                         "Available From",
-                        widget.item.pickupTime != null ? DateFormat.yMMMMd().format(widget.item.pickupTime!) : "unknown",
+                        widget.item.pickupTime != null
+                            ? DateFormat.yMMMMd()
+                                .format(widget.item.pickupTime!)
+                            : "Unknown",
                       ),
                       SizedBox(height: 16),
                       _buildField(
@@ -159,13 +162,13 @@ class _ViewItemViewState extends State<ViewItemView> {
                       _buildField(
                         context,
                         "Dimensions",
-                        widget.item.dimensions ?? "unknown",
+                        widget.item.dimensions ?? "Unknown",
                       ),
                       SizedBox(height: 16),
                       _buildField(
-                          context,
-                          "Address",
-                          widget.sale.location,
+                        context,
+                        "Address",
+                        widget.sale.location,
                       ),
                       SizedBox(height: 100),
                     ],
