@@ -30,10 +30,10 @@ class ItemCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 0.5,
-              blurRadius: 3,
-              offset: Offset(0, 3),
+              color: Colors.grey.withOpacity(0.6),
+              spreadRadius: 1,
+              blurRadius: 4,
+              offset: Offset(0, 2),
             ),
           ],
           image: DecorationImage(
@@ -42,31 +42,44 @@ class ItemCard extends StatelessWidget {
         child: Stack(children: [
           Container(
             decoration: BoxDecoration(
-                color: Color(0xbf333333),
+                color: Color(0x99333333),
                 borderRadius: BorderRadius.circular(20)),
           ),
           Positioned(
-              bottom: 14.0,
-              left: 14.0,
-              child: Text(
-                item.title.toString(),
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600),
-              )),
+            top: 18.0,
+            left: 14.0,
+            width: 130,
+            child: Text(
+              item.title.toString().toUpperCase(),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.6,
+              ),
+            ),
+          ),
           Positioned(
-              top: 30,
-              left: 0,
+              bottom: 16,
+              right: 0,
               child: Container(
-                color: Color(0xE668DB46),
-                padding: EdgeInsets.fromLTRB(25, 3, 8, 3),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(3),
+                      topLeft: Radius.circular(3)),
+                  color: Color(!item.reserved ? 0xD968DB46 : 0xD9ff5757),
+                ),
+                padding: EdgeInsets.fromLTRB(8, 2, 15, 2),
                 child: Text(
-                    item.price == 0
-                        ? 'Free!'
-                        : item.price == null
+                    item.reserved
+                        ? 'RESERVED'
+                        : item.price == 0
                             ? 'Free!'
-                            : '₪${item.price?.toString()}',
+                            : item.price == null
+                                ? 'Free!'
+                                : '₪${item.price?.toString()}',
                     style: Theme.of(context).textTheme.headline5),
               )),
         ]),
