@@ -37,4 +37,17 @@ class Item {
     images: json["images"] is List ? (json["images"] as List).map((e) => e as String).toList() : null,
     reserved: json['reserved'] is bool ? json['reserved'] as bool : false,
   );
+
+  Map<String, Object?> toJson() {
+    return {
+      'title': title,
+      'price': price,
+      'count': count,
+      'desc': desc,
+      'dimensions': dimensions,
+      'pickupTime': pickupTime != null ? Timestamp.fromDate(pickupTime!) : null,
+      'images': images,
+      'reserved': reserved,
+    };
+  }
 }

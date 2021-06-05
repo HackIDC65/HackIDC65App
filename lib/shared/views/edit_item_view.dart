@@ -46,6 +46,7 @@ class _EditItemViewState extends State<EditItemView> {
 
     if (widget.item == null) return;
 
+    images = widget.item?.images?.map((e) => ImageHolder(url: e)).toList() ?? [];
     title = widget.item?.title;
     price = widget.item?.price;
     desc = widget.item?.desc;
@@ -85,10 +86,10 @@ class _EditItemViewState extends State<EditItemView> {
                               return ref.getDownloadURL();
                             }).then((url) {
                               setState(() {
-                                images.add(ImageHolder(
+                                images = [ImageHolder(
                                   file: File(pickedFile.path),
                                   url: url,
-                                ));
+                                )];
                                 loadingImage = false;
                               });
                             });
@@ -252,14 +253,20 @@ class _EditItemViewState extends State<EditItemView> {
                   'count': this.count,
                   'pickupTime': this._selectedDay,
                 };
+
+                Item newItem;
                 if (id != null) {
                   await items.doc(id).set(delta);
                   await saleRef.set({'itemsCount': FieldValue.increment(1)}, SetOptions(merge: true));
+                  var res = widget.item!.toJson();
+                  res.addAll(delta);
+                  newItem = Item.fromJson(id, res);
                 } else {
-                  await items.add(delta);
+                  final res = await items.add(delta);
+                  newItem = Item.fromJson(res.id, delta);
                 }
 
-                return Navigator.of(context).pop();
+                return Navigator.of(context).pop({'item': newItem, 'new': id == null});
               },
             ),
           ),
