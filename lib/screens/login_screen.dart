@@ -24,7 +24,9 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: const Color(0xfffffbf4),
       body: SafeArea(
         child: LoginView(
-          onLoginSuccessfully: () {},
+          onLoginSuccessfully: (user) {
+            Navigator.of(context).pop(user);
+          },
         ),
       ),
     );

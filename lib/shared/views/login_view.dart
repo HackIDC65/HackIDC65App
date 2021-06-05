@@ -32,7 +32,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   bool isLoading = false;
-  var error;
+  dynamic error;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
@@ -69,7 +69,6 @@ class _LoginViewState extends State<LoginView> {
 
       // Obtain the auth details from the request
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      print("asdasd 1");
 
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
@@ -77,14 +76,13 @@ class _LoginViewState extends State<LoginView> {
         idToken: googleAuth.idToken,
       );
 
-      print("asdasd 2");
-
       // Once signed in, return the UserCredential
       final firebaseUser = await FirebaseAuth.instance.signInWithCredential(credential);
 
-      print("asdasd 3");
-
-      setState(() => isLoading = false);
+      setState(() {
+        isLoading = false;
+        error = null;
+      });
 
       widget.onLoginSuccessfully(firebaseUser);
 
@@ -127,6 +125,8 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    var error = this.error;
+
     return Stack(
       children: [
         Container(
@@ -175,8 +175,8 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     if (error != null)
                       Text(
-                        error.message?.toString().substring(
-                            0, min(error.message?.toString().length ?? 0, 100)) ?? "",
+                        error.toString().substring(
+                            0, min(error.toString().length, 100)),
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                               color: Colors.red,
                             ),
