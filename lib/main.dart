@@ -1,15 +1,22 @@
+import 'dart:math';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/sale.dart';
 import 'package:flutter_app/screens/home_screen.dart';
+import 'package:flutter_app/screens/login_screen.dart';
+import 'package:flutter_app/screens/sale_screen.dart';
 import 'package:flutter_app/shared/loader.dart';
 import 'package:flutter_app/utils/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   setup();
+  setUrlStrategy(PathUrlStrategy());
   return runApp(App());
 }
 
@@ -129,7 +136,6 @@ class _AppState extends State<App> {
                 cupertino: (_, __) => new CupertinoAppData(
                   theme: cupertinoTheme,
                 ),
-                home: HomeScreen(),
                 // home: LandingPage(() {
                 //   setState(() {
                 //     brightness = brightness == Brightness.light
@@ -137,6 +143,23 @@ class _AppState extends State<App> {
                 //         : Brightness.light;
                 //   });
                 // }),
+                initialRoute: '/',
+                routes: {
+                  // When navigating to the "/" route, build the FirstScreen widget.
+                  '/': (context) => HomeScreen(),
+                },
+                onGenerateRoute: (settings) {
+                  if (settings.name?.startsWith("/sale") == true) {
+                    final args = settings.arguments;
+
+                    // Then, extract the required data from the arguments and
+                    // pass the data to the correct screen.
+                    return platformPageRoute(
+                        builder: (context) {
+                      return SaleScreen.id(settings.name!.substring(min("/sale/".length, settings.name!.length)));
+                    }, context: context);
+                  }
+                },
               );
             }
 

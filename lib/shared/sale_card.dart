@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/sale.dart';
@@ -18,10 +20,11 @@ class _SaleCardState extends State<SaleCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        window.history.pushState({}, widget.sale.title, "sale/${widget.sale.id}");
         Navigator.of(context).push(platformPageRoute(
           context: context,
           builder: (BuildContext context) {
-            return SaleScreen(widget.sale.id, sale: widget.sale);
+            return SaleScreen.sale(widget.sale);
           },
         ));
       },

@@ -12,9 +12,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
-  clientId: Platform.isIOS
-      ? '57885613307-1up2gr6c04fa6l4d28140adv8vb87jdu.apps.googleusercontent.com'
-      : null,
+  // clientId: Platform.isIOS
+  //     ? '57885613307-1up2gr6c04fa6l4d28140adv8vb87jdu.apps.googleusercontent.com'
+  //     : null,
   scopes: <String>[
     'email',
   ],
@@ -69,6 +69,7 @@ class _LoginViewState extends State<LoginView> {
 
       // Obtain the auth details from the request
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      print("asdasd 1");
 
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
@@ -76,8 +77,12 @@ class _LoginViewState extends State<LoginView> {
         idToken: googleAuth.idToken,
       );
 
+      print("asdasd 2");
+
       // Once signed in, return the UserCredential
       final firebaseUser = await FirebaseAuth.instance.signInWithCredential(credential);
+
+      print("asdasd 3");
 
       setState(() => isLoading = false);
 
@@ -170,8 +175,8 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     if (error != null)
                       Text(
-                        error.message.toString().substring(
-                            0, min(error.message.toString().length, 100)),
+                        error.message?.toString().substring(
+                            0, min(error.message?.toString().length ?? 0, 100)) ?? "",
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                               color: Colors.red,
                             ),

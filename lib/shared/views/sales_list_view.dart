@@ -37,14 +37,6 @@ class _SalesListViewState extends State<SalesListView> {
     return StreamBuilder<QuerySnapshot?>(
       stream: _salesStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot?> snapshot) {
-        if (snapshot.hasError) {
-          return Text('Something went wrong');
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Loader();
-        }
-
         var salesList = snapshot.data?.docs.map((DocumentSnapshot document) {
               return Sale.fromJson(
                   document.id, document.data()! as Map<String, Object?>);
@@ -103,6 +95,17 @@ class _SalesListViewState extends State<SalesListView> {
                         ],
                       ),
                     );
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Loader();
+                  }
+
+                  if (this.user == null)
+                    return _buildNotLoggedIn(context);
+
                   if (salesList.length == 0)
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -110,6 +113,7 @@ class _SalesListViewState extends State<SalesListView> {
                         Text("You don't have any sales yet"),
                       ],
                     );
+
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: SaleCard(salesList[index - 1]),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class CustomChip extends StatelessWidget {
   final String? title;
@@ -21,7 +22,7 @@ class CustomChip extends StatelessWidget {
             color: this.textColor,
           ),
     );
-    if (Platform.isIOS) {
+    if (!kIsWeb && Platform.isIOS) {
       return CupertinoButton(
         child: text,
         padding: EdgeInsets.only(left: 4, right: 4, top: 3, bottom: 3),
