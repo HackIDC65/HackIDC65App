@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
 import 'package:flutter_app/models/sale.dart';
-import 'package:flutter_app/screens/edit_item_screen.dart';
+import 'package:flutter_app/screens/edit_sale_screen.dart';
+import 'package:flutter_app/screens/sale_screen.dart';
 import 'package:flutter_app/shared/item_card.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:share/share.dart';
@@ -18,6 +19,16 @@ class ItemsListView extends StatefulWidget {
 }
 
 class _ItemsListViewState extends State<ItemsListView> {
+  late Sale sale;
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+
+    this.sale = widget.sale;
+  }
+
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _itemsStream = FirebaseFirestore.instance
@@ -49,21 +60,40 @@ class _ItemsListViewState extends State<ItemsListView> {
                 PlatformIconButton(
                   icon: Icon(context.platformIcons.share),
                   onPressed: () {
-                    Share.share('Check out my new sale https://sales-now.com/${widget.sale.id}');
+                    Share.share(
+                        'Check out my new sale https://sales-now.com/${widget.sale.id}');
                   },
                 ),
                 Container(
-                    alignment: Alignment.centerRight,
-                    child: PopupMenuButton(
-                      itemBuilder: (BuildContext context) {
-                        return {'Edit', 'Delete'}.map((String choice) {
-                          return PopupMenuItem<String>(
-                            value: choice,
-                            child: Text(choice),
-                          );
-                        }).toList();
-                      },
-                    ))
+                  alignment: Alignment.centerRight,
+                  child: PopupMenuButton<String>(
+                    itemBuilder: (BuildContext context) {
+                      return {'Edit', 'Delete'}.map((String choice) {
+                        return PopupMenuItem<String>(
+                          value: choice,
+                          child: Text(choice),
+                        );
+                      }).toList();
+                    },
+                    onSelected: (value) async {
+                      if (value == 'Edit') {
+                        Sale? sale =
+                            await Navigator.of(context).push(platformPageRoute(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return EditSaleScreen(sale: this.sale);
+                          },
+                        ));
+
+                        if (sale != null) {
+                          setState(() {
+                            this.sale = sale;
+                          });
+                        }
+                      }
+                    },
+                  ),
+                ),
               ],
               leading: Builder(
                 builder: (context) => PlatformIconButton(
@@ -104,21 +134,20 @@ class _ItemsListViewState extends State<ItemsListView> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.sale.title, style:
-                    Theme.of(context).textTheme.headline6?.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    )),
+                    Text(this.sale.title,
+                        style: Theme.of(context).textTheme.headline6?.copyWith(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )),
                     Flexible(
                       child: Text(
-                        widget.sale.location,
+                        this.sale.location,
                         overflow: TextOverflow.ellipsis,
-                        style:
-                            Theme.of(context).textTheme.headline6?.copyWith(
-                                  fontSize: 10,
-                                  color: Colors.white,
-                                ),
+                        style: Theme.of(context).textTheme.headline6?.copyWith(
+                              fontSize: 10,
+                              color: Colors.white,
+                            ),
                       ),
                     ),
                   ],
@@ -128,7 +157,7 @@ class _ItemsListViewState extends State<ItemsListView> {
               //   PlatformIconButton(
               //     icon: Icon(context.platformIcons.share),
               //     onPressed: () {
-              //       Share.share('Check out my new sale https://sales-now.com/${widget.sale.id}');
+              //       Share.share('Check out my new sale https://sales-now.com/${this.sale.id}');
               //     },
               //   ),
               //   PlatformIconButton(
@@ -137,7 +166,7 @@ class _ItemsListViewState extends State<ItemsListView> {
               //       Navigator.of(context).push(platformPageRoute(
               //         context: context,
               //         builder: (BuildContext context) {
-              //           return CreateItemScreen(item: null, sale: widget.sale);
+              //           return CreateItemScreen(item: null, sale: this.sale);
               //         },
               //       ));
               //     },
@@ -161,7 +190,7 @@ class _ItemsListViewState extends State<ItemsListView> {
                 (context, index) {
                   if (index >= itemsList.length) Container();
                   return Padding(
-                    child: ItemCard(item: itemsList[index], sale: widget.sale),
+                    child: ItemCard(item: itemsList[index], sale: this.sale),
                     padding: EdgeInsets.only(
                       top: 16,
                       left: index % 2 == 0 ? 16 : 0,

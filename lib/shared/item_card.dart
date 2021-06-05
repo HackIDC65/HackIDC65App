@@ -36,8 +36,8 @@ class ItemCard extends StatelessWidget {
               offset: Offset(0, 2),
             ),
           ],
-          image: DecorationImage(
-              image: NetworkImage(item.images?[0] ?? ''), fit: BoxFit.cover),
+          image: (item.images?.length ?? 0) > 0 ? DecorationImage(
+              image: NetworkImage(item.images?[0] ?? ''), fit: BoxFit.cover) : null,
         ),
         child: Stack(children: [
           Container(

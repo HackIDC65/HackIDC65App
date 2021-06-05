@@ -101,7 +101,7 @@ class _EditItemViewState extends State<EditItemView> {
                                     child: Icon(
                                     Icons.photo_camera_outlined,
                                     size: 60,
-                                    color: Colors.white,
+                                    color: const Color(0xfffffbf4),
                                   ))
                                 : loadingImage
                                     ? Center(child: Loader())
@@ -129,7 +129,7 @@ class _EditItemViewState extends State<EditItemView> {
                               child: Container(
                                 height: 32,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: const Color(0xfffffbf4),
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(24),
                                     topRight: Radius.circular(24),
@@ -237,10 +237,10 @@ class _EditItemViewState extends State<EditItemView> {
                   "",
               width: double.infinity,
               onPressed: () async {
-                CollectionReference items = FirebaseFirestore.instance
+                DocumentReference saleRef = FirebaseFirestore.instance
                     .collection('sales')
-                    .doc(widget.sale.id)
-                    .collection('items');
+                    .doc(widget.sale.id);
+                CollectionReference items = saleRef.collection('items');
                 var id = widget.item?.id;
 
                 var delta = {
@@ -254,6 +254,7 @@ class _EditItemViewState extends State<EditItemView> {
                 };
                 if (id != null) {
                   await items.doc(id).set(delta);
+                  await saleRef.set({'itemsCount': FieldValue.increment(1)}, SetOptions(merge: true));
                 } else {
                   await items.add(delta);
                 }

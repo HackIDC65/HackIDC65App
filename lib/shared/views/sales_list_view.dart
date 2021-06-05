@@ -3,10 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/sale.dart';
+import 'package:flutter_app/screens/edit_sale_screen.dart';
 import 'package:flutter_app/shared/filled_button.dart';
 import 'package:flutter_app/shared/loader.dart';
 import 'package:flutter_app/shared/login_button.dart';
 import 'package:flutter_app/shared/sale_card.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SalesListView extends StatefulWidget {
   const SalesListView();
@@ -124,7 +126,12 @@ class _SalesListViewState extends State<SalesListView> {
                   'NEW SALE',
                   width: double.infinity,
                   onPressed: () {
-                    print('clicked');
+                    Navigator.of(context).push(platformPageRoute(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return EditSaleScreen();
+                      },
+                    ));
                   },
                 ),
               ),

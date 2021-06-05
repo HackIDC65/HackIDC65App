@@ -452,5 +452,20 @@
   "@itemDimensionsHint": {
     "description": "",
     "type": "text"
+  },
+  "createSale": "Create",
+  "@createSale": {
+    "description": "",
+    "type": "text"
+  },
+  "saveSale": "Save",
+  "@saveSale": {
+    "description": "",
+    "type": "text"
+  },
+  "newSaleTitle": "Create a new sale",
+  "@newSaleTitle": {
+    "description": "",
+    "type": "text"
   }
 }
