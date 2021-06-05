@@ -78,8 +78,9 @@ class _ItemsListViewState extends State<ItemsListView> {
                   PlatformIconButton(
                     icon: Icon(context.platformIcons.share),
                     onPressed: () {
+                      var uri = Uri.parse(window.location.href);
                       Share.share(
-                          'Check out my new sale http://locallhost:5000/sale/${widget.sale!.id}');
+                          'Check out my new sale ${uri.origin}/sale/${widget.sale!.id}');
                     },
                   ),
                 if (widget.sale?.id != null && user?.uid == widget.sale!.id)

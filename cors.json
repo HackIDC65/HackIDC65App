@@ -1,0 +1,7 @@
+[
+  {
+    "origin": ["https://hackidc-65-2021.firebaseapp.com", "https://hackidc-65-2021.web.app"],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600
+  }
+]
