@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/sale.dart';
 import 'package:flutter_app/shared/filled_button.dart';
+import 'package:flutter_app/shared/loader.dart';
+import 'package:flutter_app/shared/login_button.dart';
 import 'package:flutter_app/shared/sale_card.dart';
 
 class SalesListView extends StatefulWidget {
@@ -13,20 +16,31 @@ class SalesListView extends StatefulWidget {
 }
 
 class _SalesListViewState extends State<SalesListView> {
-  final Stream<QuerySnapshot> _salesStream =
-      FirebaseFirestore.instance.collection('sales').snapshots();
+  User? user;
+  late Stream<QuerySnapshot?> _salesStream;
+
+  _SalesListViewState() {
+    _salesStream = FirebaseAuth.instance.authStateChanges().asyncExpand((event) {
+      user = event;
+      if (event == null) return Stream.value(null);
+      return FirebaseFirestore.instance
+          .collection('sales')
+          .where("userId", isEqualTo: event.uid)
+          .snapshots();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
+    return StreamBuilder<QuerySnapshot?>(
       stream: _salesStream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot?> snapshot) {
         if (snapshot.hasError) {
           return Text('Something went wrong');
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
+          return Loader();
         }
 
         var salesList = snapshot.data?.docs.map((DocumentSnapshot document) {
@@ -87,12 +101,19 @@ class _SalesListViewState extends State<SalesListView> {
                         ],
                       ),
                     );
+                  if (salesList.length == 0)
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("You don't have any sales yet"),
+                      ],
+                    );
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: SaleCard(salesList[index - 1]),
                   );
                 },
-                itemCount: salesList.length + 1,
+                itemCount: salesList.length == 0 ? 2 : salesList.length + 1,
               ),
             ),
             Align(
@@ -111,6 +132,20 @@ class _SalesListViewState extends State<SalesListView> {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildNotLoggedIn(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text("You are not logged in, log in to create a new sale"),
+          Container(height: 16),
+          LoginButton(),
+        ],
+      ),
     );
   }
 }

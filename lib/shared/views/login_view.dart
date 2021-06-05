@@ -1,6 +1,7 @@
 import 'dart:io';
 import "dart:math";
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/shared/filled_button.dart';
@@ -62,17 +63,25 @@ class _LoginViewState extends State<LoginView> {
 
   Future<void> _signInWithGoogle() async {
     try {
-      var account = await _googleSignIn.signIn();
-      if (account == null) return;
+      // Trigger the authentication flow
+      final googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) return;
 
-      var auth = await account.authentication;
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
-      CollectionReference users = FirebaseFirestore.instance.collection('users');
-      await users.add({'email': account.email});
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      final firebaseUser = await FirebaseAuth.instance.signInWithCredential(credential);
 
       setState(() => isLoading = false);
 
-      widget.onLoginSuccessfully();
+      widget.onLoginSuccessfully(firebaseUser);
 
       return;
     } catch (e) {
