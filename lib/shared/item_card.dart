@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
 import 'package:flutter_app/models/sale.dart';
-import 'package:flutter_app/screens/view_item_screen.dart';
+import 'package:flutter_app/screens/item_screen.dart';
 import 'package:flutter_app/shared/filled_button.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -19,7 +19,7 @@ class ItemCard extends StatelessWidget {
         Navigator.of(context).push(platformPageRoute(
           context: context,
           builder: (BuildContext context) {
-            return ViewItemScreen(this.item.id, this.sale.id,
+            return ItemScreen(this.item.id, this.sale.id,
                 item: this.item, sale: this.sale);
           },
         ));

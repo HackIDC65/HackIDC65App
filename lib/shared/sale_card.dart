@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/sale.dart';
-import 'package:flutter_app/screens/view_sale_screen.dart';
+import 'package:flutter_app/screens/sale_screen.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SaleCard extends StatefulWidget {
@@ -21,7 +21,7 @@ class _SaleCardState extends State<SaleCard> {
         Navigator.of(context).push(platformPageRoute(
           context: context,
           builder: (BuildContext context) {
-            return ViewSaleScreen(widget.sale.id, sale: widget.sale);
+            return SaleScreen(widget.sale.id, sale: widget.sale);
           },
         ));
       },

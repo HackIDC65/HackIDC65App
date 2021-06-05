@@ -12,14 +12,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class CreateItemView extends StatefulWidget {
+class EditItemView extends StatefulWidget {
   final Item? item;
   final Sale sale;
 
-  const CreateItemView({required this.sale, this.item});
+  const EditItemView({required this.sale, this.item});
 
   @override
-  _CreateItemViewState createState() => _CreateItemViewState();
+  _EditItemViewState createState() => _EditItemViewState();
 }
 
 class ImageHolder {
@@ -29,7 +29,7 @@ class ImageHolder {
   const ImageHolder({this.file, this.url});
 }
 
-class _CreateItemViewState extends State<CreateItemView> {
+class _EditItemViewState extends State<EditItemView> {
   List<ImageHolder> images = [];
   bool loadingImage = false;
   String? title;

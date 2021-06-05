@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
 import 'package:flutter_app/models/sale.dart';
-import 'package:flutter_app/screens/create_item_screen.dart';
+import 'package:flutter_app/screens/edit_item_screen.dart';
 import 'package:flutter_app/shared/item_card.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:share/share.dart';

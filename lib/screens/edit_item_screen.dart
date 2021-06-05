@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
 import 'package:flutter_app/models/sale.dart';
-import 'package:flutter_app/shared/create_item_view.dart';
-import 'package:flutter_app/shared/login_view.dart';
+import 'package:flutter_app/shared/views/edit_item_view.dart';
+import 'package:flutter_app/shared/views/login_view.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class CreateItemScreen extends StatefulWidget {
+class EditItemScreen extends StatefulWidget {
   final Item? item;
   final Sale sale;
 
-  CreateItemScreen({this.item, required this.sale});
+  EditItemScreen({this.item, required this.sale});
 
   @override
-  _CreateItemScreenState createState() => _CreateItemScreenState();
+  _EditItemScreenState createState() => _EditItemScreenState();
 }
 
-class _CreateItemScreenState extends State<CreateItemScreen> {
+class _EditItemScreenState extends State<EditItemScreen> {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
@@ -30,7 +30,7 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
       ),
       backgroundColor: const Color(0xfffffbf4),
       body: SafeArea(
-        child: CreateItemView(item: widget.item, sale: widget.sale),
+        child: EditItemView(item: widget.item, sale: widget.sale),
       ),
     );
   }

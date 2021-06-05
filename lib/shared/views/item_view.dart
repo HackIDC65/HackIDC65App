@@ -7,17 +7,17 @@ import 'package:flutter_app/shared/custom_chip.dart';
 import 'package:flutter_app/shared/filled_button.dart';
 import 'package:intl/intl.dart';
 
-class ViewItemView extends StatefulWidget {
+class ItemView extends StatefulWidget {
   final Item item;
   final Sale sale;
 
-  ViewItemView(this.item, this.sale);
+  ItemView(this.item, this.sale);
 
   @override
-  _ViewItemViewState createState() => _ViewItemViewState();
+  _ItemViewState createState() => _ItemViewState();
 }
 
-class _ViewItemViewState extends State<ViewItemView> {
+class _ItemViewState extends State<ItemView> {
   late Item item;
   late Sale sale;
 

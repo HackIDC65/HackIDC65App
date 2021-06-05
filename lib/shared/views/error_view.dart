@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'filled_button.dart';
+import '../filled_button.dart';
 
 class ErrorView extends StatelessWidget {
   final Function? onTryAgainPressed;

@@ -38,53 +38,54 @@ class _SalesListViewState extends State<SalesListView> {
         return Stack(
           children: [
             Container(
-              child: Expanded(
-                  child: ListView.builder(
+              child: ListView.builder(
                 itemBuilder: (context, index) {
                   if (index == 0)
                     return SizedBox(
                       height: 100,
-                      child: Stack(children: [
-                        Container(
-                          color: Color(0xff333333),
-                          height: double.infinity,
-                          width: double.infinity,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'ALL SALES',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 2.4,
-                                fontSize: 16,
+                      child: Stack(
+                        children: [
+                          Container(
+                            color: Color(0xff333333),
+                            height: double.infinity,
+                            width: double.infinity,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                'ALL SALES',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 2.4,
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 45,
-                              child: Stack(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Container(
-                                      height: 32,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffFFFBF4),
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(24),
-                                          topRight: Radius.circular(24),
+                              SizedBox(
+                                height: 45,
+                                child: Stack(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Container(
+                                        height: 32,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffFFFBF4),
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(24),
+                                            topRight: Radius.circular(24),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        )
-                      ]),
+                            ],
+                          ),
+                        ],
+                      ),
                     );
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -92,7 +93,7 @@ class _SalesListViewState extends State<SalesListView> {
                   );
                 },
                 itemCount: salesList.length + 1,
-              )),
+              ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -106,7 +107,7 @@ class _SalesListViewState extends State<SalesListView> {
                   },
                 ),
               ),
-            )
+            ),
           ],
         );
       },

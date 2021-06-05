@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/shared/login_view.dart';
+import 'package:flutter_app/shared/views/login_view.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class LoginScreen extends StatefulWidget {

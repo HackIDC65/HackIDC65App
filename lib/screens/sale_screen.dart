@@ -1,27 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/sale.dart';
-import 'package:flutter_app/screens/create_item_screen.dart';
+import 'package:flutter_app/screens/edit_item_screen.dart';
 import 'package:flutter_app/shared/filled_button.dart';
-import 'package:flutter_app/shared/items_list_view.dart';
+import 'package:flutter_app/shared/views/items_list_view.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:share/share.dart';
 
-class ViewSaleScreen extends StatefulWidget {
-  String id;
-  Sale sale;
+class SaleScreen extends StatefulWidget {
+  final String id;
+  final Sale sale;
 
-  ViewSaleScreen(this.id, {required this.sale});
+  SaleScreen(this.id, {required this.sale});
 
-  ViewSaleScreen.sale(Sale fullSale)
+  SaleScreen.sale(Sale fullSale)
       : this.id = fullSale.id,
         this.sale = fullSale;
 
   @override
-  _ViewSaleScreenState createState() => _ViewSaleScreenState();
+  _SaleScreenState createState() => _SaleScreenState();
 }
 
-class _ViewSaleScreenState extends State<ViewSaleScreen> {
+class _SaleScreenState extends State<SaleScreen> {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
@@ -41,7 +41,7 @@ class _ViewSaleScreenState extends State<ViewSaleScreen> {
                     Navigator.of(context).push(platformPageRoute(
                       context: context,
                       builder: (BuildContext context) {
-                        return CreateItemScreen(item: null, sale: widget.sale);
+                        return EditItemScreen(item: null, sale: widget.sale);
                       },
                     ));
                   },
