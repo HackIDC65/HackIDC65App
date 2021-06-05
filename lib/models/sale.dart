@@ -20,7 +20,7 @@ class Sale {
           itemsCount: json['itemsCount'] is int ? json['itemsCount'] as int : 0,
           location:
               json['location'] is String ? json['location'] as String : '',
-          userId: json['title']! as String,
+          userId: json['userId']! as String,
         );
 
   Map<String, Object?> toJson() {

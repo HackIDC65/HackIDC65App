@@ -24,7 +24,6 @@ class SaleScreen extends StatefulWidget {
 }
 
 class _SaleScreenState extends State<SaleScreen> {
-  User? user = FirebaseAuth.instance.currentUser;
   late Stream<Sale?> saleStream;
 
   @override
@@ -43,6 +42,8 @@ class _SaleScreenState extends State<SaleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
+
     return PlatformScaffold(
       backgroundColor: const Color(0xfffffbf4),
       body: SafeArea(
@@ -62,7 +63,7 @@ class _SaleScreenState extends State<SaleScreen> {
               return Stack(
                 children: [
                   ItemsListView(widget.id, sale: sale),
-                  if (user != null && sale?.userId == user?.uid)
+                  if (user != null && sale?.userId == user.uid)
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Padding(

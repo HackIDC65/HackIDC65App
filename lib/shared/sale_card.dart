@@ -1,9 +1,9 @@
-import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/sale.dart';
 import 'package:flutter_app/screens/sale_screen.dart';
+import 'package:flutter_app/shared/platform/window/noweb_window.dart'
+    if (dart.library.html) 'package:flutter_app/shared/platform/window/web_window.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SaleCard extends StatefulWidget {
@@ -20,13 +20,18 @@ class _SaleCardState extends State<SaleCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        window.history.pushState({}, widget.sale.title, "sale/${widget.sale.id}");
-        Navigator.of(context).push(platformPageRoute(
-          context: context,
-          builder: (BuildContext context) {
-            return SaleScreen.sale(widget.sale);
-          },
-        ));
+        if (hasWindow) {
+          window.history
+              .pushState({}, widget.sale.title, "sale/${widget.sale.id}");
+          Navigator.of(context).pushNamed("/sale/${widget.sale.id}");
+        } else {
+          Navigator.of(context).push(platformPageRoute(
+            context: context,
+            builder: (BuildContext context) {
+              return SaleScreen.sale(widget.sale);
+            },
+          ));
+        }
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 10.0, top: 5.0),

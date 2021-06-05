@@ -1,11 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/shared/views/items_list_view.dart';
-import 'package:flutter_app/shared/views/sales_list_view.dart';
 import 'package:flutter_app/shared/views/profile_view.dart';
-import 'package:flutter_app/utils/get_it.dart';
+import 'package:flutter_app/shared/views/sales_list_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_app/shared/views/edit_item_view.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -17,13 +15,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var user = FirebaseAuth.instance.currentUser;
     return PlatformScaffold(
       appBar: PlatformAppBar(
         cupertino: (_, __) =>
             CupertinoNavigationBarData(transitionBetweenRoutes: false),
         title: Text(
-          "Hello, Ari!",
-        ),
+            user != null ? "Hello ${user.displayName}" : "Hello stranger -_^"),
         trailingActions: [
           Padding(
             padding: EdgeInsets.only(right: 10),

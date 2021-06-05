@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,12 +30,6 @@ class _ItemsListViewState extends State<ItemsListView> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-
-    // if (first || this.saleId != widget.saleId && widget.saleId.isNotEmpty) {
-    //   var uri = Uri.parse(window.location.href);
-    //   window.location.href = "${uri.origin}/sale/${widget.saleId}";
-    //   first = false;
-    // }
 
     this.saleId = widget.saleId;
     this.sale = widget.sale;
@@ -78,9 +70,8 @@ class _ItemsListViewState extends State<ItemsListView> {
                   PlatformIconButton(
                     icon: Icon(context.platformIcons.share),
                     onPressed: () {
-                      var uri = Uri.parse(window.location.href);
                       Share.share(
-                          'Check out my new sale ${uri.origin}/sale/${widget.sale!.id}');
+                          'Check out my new sale https://hackidc-65-2021.firebaseapp.com/sale/${widget.sale!.id}');
                     },
                   ),
                 if (widget.sale?.id != null && user?.uid == widget.sale!.id)
