@@ -7,9 +7,8 @@ import 'package:flutter_app/models/sale.dart';
 import 'package:flutter_app/screens/edit_sale_screen.dart';
 import 'package:flutter_app/shared/item_card.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:share/share.dart';
-
-import '../loader.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ItemsListView extends StatefulWidget {
   final String saleId;
@@ -28,7 +27,6 @@ class _ItemsListViewState extends State<ItemsListView> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
 
     this.saleId = widget.saleId;
@@ -49,14 +47,6 @@ class _ItemsListViewState extends State<ItemsListView> {
     return StreamBuilder<QuerySnapshot?>(
       stream: _itemsStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot?> snapshot) {
-        if (snapshot.hasError) {
-          return Text('Something went wrong');
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Loader();
-        }
-
         var itemsList = snapshot.data?.docs.map((DocumentSnapshot document) {
               return Item.fromJson(
                   document.id, document.data()! as Map<String, Object?>);
@@ -106,12 +96,14 @@ class _ItemsListViewState extends State<ItemsListView> {
                     ),
                   ),
               ],
-              leading: Navigator.of(context).canPop() ? Builder(
-                builder: (context) => PlatformIconButton(
-                  icon: Image.asset("graphics/ic_back.png"),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ) : null,
+              leading: Navigator.of(context).canPop()
+                  ? Builder(
+                      builder: (context) => PlatformIconButton(
+                        icon: Image.asset("graphics/ic_back.png"),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                    )
+                  : null,
               expandedHeight: 180,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
@@ -164,66 +156,63 @@ class _ItemsListViewState extends State<ItemsListView> {
                   ],
                 ),
               ),
-              // trailingActions: [
-              //   PlatformIconButton(
-              //     icon: Icon(context.platformIcons.share),
-              //     onPressed: () {
-              //       Share.share('Check out my new sale https://sales-now.com/${this.sale.id}');
-              //     },
-              //   ),
-              //   PlatformIconButton(
-              //     icon: Icon(context.platformIcons.add),
-              //     onPressed: () {
-              //       Navigator.of(context).push(platformPageRoute(
-              //         context: context,
-              //         builder: (BuildContext context) {
-              //           return CreateItemScreen(item: null, sale: this.sale);
-              //         },
-              //       ));
-              //     },
-              //   ),
-              //   Container(
-              //       alignment: Alignment.centerRight,
-              //       child: PopupMenuButton(
-              //         itemBuilder: (BuildContext context) {
-              //           return {'Edit', 'Delete'}.map((String choice) {
-              //             return PopupMenuItem<String>(
-              //               value: choice,
-              //               child: Text(choice),
-              //             );
-              //           }).toList();
-              //         },
-              //       )),
-              // ],
             ),
-            SliverGrid(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  if (this.sale == null) {
-                    return Center(child: Text("No such sale"));
-                  }
-
-                  return Padding(
-                    child: ItemCard(item: itemsList[index], sale: this.sale!),
-                    padding: EdgeInsets.only(
-                      top: 16,
-                      left: index % 2 == 0 ? 16 : 0,
-                      right: index % 2 == 1 ? 16 : 0,
-                    ),
-                  );
-                },
-                childCount: itemsList.length,
+            if (snapshot.hasError)
+              SliverToBoxAdapter(child: Text('Something went wrong')),
+            if (!snapshot.hasError) ...[
+              SliverPadding(
+                padding: EdgeInsets.all(16).copyWith(bottom: 100),
+                sliver: SliverGrid(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      return snapshot.connectionState ==
+                                  ConnectionState.waiting
+                          ? _buildShimmerItem(context)
+                          : ItemCard(item: itemsList[index], sale: this.sale!);
+                    },
+                    childCount:
+                        snapshot.connectionState == ConnectionState.waiting
+                            ? 8
+                            : itemsList.length,
+                  ),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                  ),
+                ),
               ),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 14,
-                mainAxisSpacing: 0,
-              ),
-            ),
-            SliverFillRemaining(),
+            ],
           ],
         );
       },
+    );
+  }
+
+  _buildShimmerItem(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Color(0xffFFFBF4),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.6),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade100,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Color(0xffFFFBF4),
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      ),
     );
   }
 }

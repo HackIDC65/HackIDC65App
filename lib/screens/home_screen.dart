@@ -15,35 +15,40 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var user = FirebaseAuth.instance.currentUser;
-    return PlatformScaffold(
-      appBar: PlatformAppBar(
-        cupertino: (_, __) =>
-            CupertinoNavigationBarData(transitionBetweenRoutes: false),
-        title: Text(
-            user != null ? "Hello ${user.displayName}" : "Hello stranger -_^"),
-        trailingActions: [
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: PlatformIconButton(
-                icon: Icon(
-              Icons.notifications_none_outlined,
-              color: Colors.white,
-            )),
-          )
-        ],
-        material: (_, __) => MaterialAppBarData(elevation: 0),
-        // trailingActions: <Widget>[
-        //   PlatformIconButton(
-        //     padding: EdgeInsets.zero,
-        //     icon: Icon(context.platformIcons.search),
-        //     onPressed: _openFiltersScreen,
-        //   ),
-        // ],
-      ),
-      backgroundColor: const Color(0xfffffbf4),
-      body: SafeArea(child: _buildPage(_selectedIndex)),
-      bottomNavBar: _buildBottomNavigationBar() as PlatformNavBar?,
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        var user = snapshot.data;
+        return PlatformScaffold(
+          appBar: PlatformAppBar(
+            cupertino: (_, __) =>
+                CupertinoNavigationBarData(transitionBetweenRoutes: false),
+            title: Text(
+                user != null ? "Hello ${user.displayName}" : "Hello stranger -_^"),
+            trailingActions: [
+              Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: PlatformIconButton(
+                    icon: Icon(
+                  Icons.notifications_none_outlined,
+                  color: Colors.white,
+                )),
+              )
+            ],
+            material: (_, __) => MaterialAppBarData(elevation: 0),
+            // trailingActions: <Widget>[
+            //   PlatformIconButton(
+            //     padding: EdgeInsets.zero,
+            //     icon: Icon(context.platformIcons.search),
+            //     onPressed: _openFiltersScreen,
+            //   ),
+            // ],
+          ),
+          backgroundColor: const Color(0xfffffbf4),
+          body: SafeArea(child: _buildPage(_selectedIndex)),
+          bottomNavBar: _buildBottomNavigationBar() as PlatformNavBar?,
+        );
+      }
     );
   }
 

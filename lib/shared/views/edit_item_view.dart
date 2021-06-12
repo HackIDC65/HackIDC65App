@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
 import 'package:flutter_app/models/sale.dart';
@@ -46,7 +46,8 @@ class _EditItemViewState extends State<EditItemView> {
 
     if (widget.item == null) return;
 
-    images = widget.item?.images?.map((e) => ImageHolder(url: e)).toList() ?? [];
+    images =
+        widget.item?.images?.map((e) => ImageHolder(url: e)).toList() ?? [];
     title = widget.item?.title;
     price = widget.item?.price;
     desc = widget.item?.desc;
@@ -79,9 +80,8 @@ class _EditItemViewState extends State<EditItemView> {
                             setState(() {
                               loadingImage = true;
                             });
-                            firebase_storage.Reference ref = firebase_storage
-                                .FirebaseStorage.instance
-                                .ref("${DateTime.now()}.png");
+                            Reference ref = FirebaseStorage.instance.ref(
+                                "${DateTime.now()}.png");
                             ref.putFile(File(pickedFile.path)).then((a) {
                               return ref.getDownloadURL();
                             }).then((url) {
@@ -89,7 +89,8 @@ class _EditItemViewState extends State<EditItemView> {
                                 images = [ImageHolder(
                                   file: File(pickedFile.path),
                                   url: url,
-                                )];
+                                )
+                                ];
                                 loadingImage = false;
                               });
                             });
@@ -97,24 +98,25 @@ class _EditItemViewState extends State<EditItemView> {
                         });
                       },
                       child: Container(
-                        child: loadingImage ? Center(child: Loader()) : (images.length == 0
-                                ? Center(
-                                    child: Icon(
-                                    Icons.photo_camera_outlined,
-                                    size: 60,
-                                    color: const Color(0xfffffbf4),
-                                  ))
-                                : loadingImage
-                                    ? Center(child: Loader())
-                                    : (images[0].file != null
-                                        ? Image.file(
-                                            images[0].file!,
-                                            fit: BoxFit.fitWidth,
-                                          )
-                                        : Image.network(
-                                            images[0].url!,
-                                            fit: BoxFit.fitWidth,
-                                          ))),
+                        child: loadingImage ? Center(child: Loader()) : (images
+                            .length == 0
+                            ? Center(
+                            child: Icon(
+                              Icons.photo_camera_outlined,
+                              size: 60,
+                              color: const Color(0xfffffbf4),
+                            ))
+                            : loadingImage
+                            ? Center(child: Loader())
+                            : (images[0].file != null
+                            ? Image.file(
+                          images[0].file!,
+                          fit: BoxFit.fitWidth,
+                        )
+                            : Image.network(
+                          images[0].url!,
+                          fit: BoxFit.fitWidth,
+                        ))),
                       ),
                     ),
                   ),
@@ -156,7 +158,9 @@ class _EditItemViewState extends State<EditItemView> {
                       onChanged: (value) {
                         this.title = value;
                       },
-                      hintText: AppLocalizations.of(context)?.itemTitleHint,
+                      hintText: AppLocalizations
+                          .of(context)
+                          ?.itemTitleHint,
                     ),
                     SizedBox(height: 8),
                     PlatformTextFormField(
@@ -167,7 +171,9 @@ class _EditItemViewState extends State<EditItemView> {
                       onChanged: (value) {
                         this.price = int.parse(value);
                       },
-                      hintText: AppLocalizations.of(context)?.itemPriceHint,
+                      hintText: AppLocalizations
+                          .of(context)
+                          ?.itemPriceHint,
                     ),
                     SizedBox(height: 8),
                     PlatformTextFormField(
@@ -178,7 +184,9 @@ class _EditItemViewState extends State<EditItemView> {
                         this.desc = value;
                       },
                       hintText:
-                      AppLocalizations.of(context)?.itemDescriptionHint,
+                      AppLocalizations
+                          .of(context)
+                          ?.itemDescriptionHint,
                     ),
                     SizedBox(height: 8),
                     PlatformTextFormField(
@@ -189,7 +197,9 @@ class _EditItemViewState extends State<EditItemView> {
                         this.dimensions = value;
                       },
                       hintText:
-                      AppLocalizations.of(context)?.itemDimensionsHint,
+                      AppLocalizations
+                          .of(context)
+                          ?.itemDimensionsHint,
                     ),
                     SizedBox(height: 8),
                     PlatformTextFormField(
@@ -200,7 +210,9 @@ class _EditItemViewState extends State<EditItemView> {
                       onChanged: (value) {
                         this.count = int.parse(value);
                       },
-                      hintText: AppLocalizations.of(context)?.itemCountHint,
+                      hintText: AppLocalizations
+                          .of(context)
+                          ?.itemCountHint,
                     ),
                     SizedBox(height: 8),
                     TableCalendar(
@@ -233,20 +245,24 @@ class _EditItemViewState extends State<EditItemView> {
             padding: const EdgeInsets.only(bottom: 32, left: 32, right: 32),
             child: FilledButton.text(
               (widget.item != null
-                      ? AppLocalizations.of(context)?.saveItem
-                      : AppLocalizations.of(context)?.createItem) ??
+                  ? AppLocalizations
+                  .of(context)
+                  ?.saveItem
+                  : AppLocalizations
+                  .of(context)
+                  ?.createItem) ??
                   "",
               width: double.infinity,
               onPressed: () async {
-                DocumentReference saleRef = FirebaseFirestore.instance
-                    .collection('sales')
+                DocumentReference saleRef = firestore.collection('sales')
                     .doc(widget.sale.id);
                 CollectionReference items = saleRef.collection('items');
                 var id = widget.item?.id;
 
                 var delta = {
                   'title': this.title,
-                  'images': images.map((e) => e.url).toList().where((element) => element != null).toList(),
+                  'images': images.map((e) => e.url).toList().where((
+                      element) => element != null).toList(),
                   'price': this.price,
                   'desc': this.desc,
                   'dimensions': this.dimensions,
@@ -257,7 +273,8 @@ class _EditItemViewState extends State<EditItemView> {
                 Item newItem;
                 if (id != null) {
                   await items.doc(id).set(delta);
-                  await saleRef.set({'itemsCount': FieldValue.increment(1)}, SetOptions(merge: true));
+                  await saleRef.set({'itemsCount': FieldValue.increment(1)},
+                      SetOptions(merge: true));
                   var res = widget.item!.toJson();
                   res.addAll(delta);
                   newItem = Item.fromJson(id, res);
@@ -266,7 +283,8 @@ class _EditItemViewState extends State<EditItemView> {
                   newItem = Item.fromJson(res.id, delta);
                 }
 
-                return Navigator.of(context).pop({'item': newItem, 'new': id == null});
+                return Navigator.of(context).pop(
+                    {'item': newItem, 'new': id == null});
               },
             ),
           ),
