@@ -34,15 +34,10 @@ class _SaleCardState extends State<SaleCard> {
         }
       },
       child: Container(
-        margin: EdgeInsets.only(bottom: 10.0, top: 5.0),
-        padding: EdgeInsets.fromLTRB(3, 15, 3, 15),
+        height: 52,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(50),
-              topRight: Radius.circular(50),
-              bottomLeft: Radius.circular(50),
-              bottomRight: Radius.circular(50)),
+          borderRadius: BorderRadius.circular(26),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
@@ -53,13 +48,15 @@ class _SaleCardState extends State<SaleCard> {
           ],
         ),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                widget.sale.title,
-                style: Theme.of(context).textTheme.headline5,
+              Flexible(
+                child: Text(
+                  widget.sale.title,
+                  style: Theme.of(context).textTheme.headline5,
+                ),
               ),
               Text(
                 widget.sale.itemsCount.toString() + ' items on sale',

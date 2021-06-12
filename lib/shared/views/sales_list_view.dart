@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/models/sale.dart';
 import 'package:flutter_app/screens/edit_sale_screen.dart';
 import 'package:flutter_app/shared/filled_button.dart';
-import 'package:flutter_app/shared/loader.dart';
 import 'package:flutter_app/shared/login_button.dart';
 import 'package:flutter_app/shared/sale_card.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:shimmer/shimmer.dart';
 
 class SalesListView extends StatefulWidget {
   const SalesListView();
@@ -22,7 +22,8 @@ class _SalesListViewState extends State<SalesListView> {
   late Stream<QuerySnapshot?> _salesStream;
 
   _SalesListViewState() {
-    _salesStream = FirebaseAuth.instance.authStateChanges().asyncExpand((event) {
+    _salesStream =
+        FirebaseAuth.instance.authStateChanges().asyncExpand((event) {
       user = event;
       if (event == null) return Stream.value(null);
       return FirebaseFirestore.instance
@@ -50,7 +51,7 @@ class _SalesListViewState extends State<SalesListView> {
                 itemBuilder: (context, index) {
                   if (index == 0)
                     return SizedBox(
-                      height: 100,
+                      height: 80,
                       child: Stack(
                         children: [
                           Container(
@@ -99,12 +100,13 @@ class _SalesListViewState extends State<SalesListView> {
                     return Text('Something went wrong');
                   }
 
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Loader();
-                  }
+                  if (snapshot.connectionState == ConnectionState.waiting)
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: _buildShimmerItem(context),
+                    );
 
-                  if (this.user == null)
-                    return _buildNotLoggedIn(context);
+                  if (this.user == null) return _buildNotLoggedIn(context);
 
                   if (salesList.length == 0)
                     return Column(
@@ -115,11 +117,14 @@ class _SalesListViewState extends State<SalesListView> {
                     );
 
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: SaleCard(salesList[index - 1]),
                   );
                 },
-                itemCount: salesList.length == 0 ? 2 : salesList.length + 1,
+                itemCount: snapshot.connectionState == ConnectionState.waiting
+                    ? 6
+                    : (salesList.length == 0 ? 2 : salesList.length + 1),
               ),
             ),
             Align(
@@ -156,6 +161,34 @@ class _SalesListViewState extends State<SalesListView> {
           Container(height: 16),
           LoginButton(),
         ],
+      ),
+    );
+  }
+
+  _buildShimmerItem(BuildContext context) {
+    return Container(
+      height: 52,
+      decoration: BoxDecoration(
+        color: Color(0xffFFFBF4),
+        borderRadius: BorderRadius.circular(26),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 0.5,
+            blurRadius: 3,
+            offset: Offset(0, 3), // changes position of shadow
+          )
+        ],
+      ),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade100,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Color(0xffFFFBF4),
+            borderRadius: BorderRadius.circular(26),
+          ),
+        ),
       ),
     );
   }
