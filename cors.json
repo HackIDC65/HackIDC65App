@@ -1,6 +1,6 @@
 [
   {
-    "origin": ["https://hackidc-65-2021.firebaseapp.com", "https://hackidc-65-2021.web.app"],
+    "origin": ["https://hackidc-65-2021.firebaseapp.com", "https://hackidc-65-2021.web.app", "http://localhost:5000"],
     "method": ["GET"],
     "maxAgeSeconds": 3600
   }
