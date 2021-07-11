@@ -69,11 +69,11 @@ class ItemCard extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(3),
                       topLeft: Radius.circular(3)),
-                  color: Color(!item.reserved ? 0xD968DB46 : 0xD9ff5757),
+                  color: Color(!item.fullyReserved() ? 0xD968DB46 : 0xD9ff5757),
                 ),
                 padding: EdgeInsets.fromLTRB(8, 2, 15, 2),
                 child: Text(
-                    item.reserved
+                    item.fullyReserved()
                         ? 'RESERVED'
                         : item.price == 0
                             ? 'Free!'

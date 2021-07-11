@@ -9,7 +9,7 @@ class Item {
   final String? dimensions;
   final DateTime? pickupTime;
   final List<String>? images;
-  bool reserved;
+  final int? reservedCount;
 
   Item({
     required this.id,
@@ -20,23 +20,28 @@ class Item {
     this.dimensions,
     this.pickupTime,
     this.images,
-    this.reserved = false,
+    this.reservedCount,
   });
 
   Item.fromJson(String id, Map<String, Object?> json)
       : this(
-    id: id,
-    title: json['title']! as String,
-    price: json['price'] is int ? json['price'] as int : null,
-    count: json['count'] is int ? json['count'] as int : null,
-    desc: json['desc'] is String ? json['desc'] as String : null,
-    dimensions: json['dimensions'] is String ? json['dimensions'] as String : null,
-    pickupTime: json['pickupTime'] is Timestamp
-        ? (json['pickupTime'] as Timestamp).toDate()
-        : null,
-    images: json["images"] is List ? (json["images"] as List).map((e) => e as String).toList() : null,
-    reserved: json['reserved'] is bool ? json['reserved'] as bool : false,
-  );
+          id: id,
+          title: json['title']! as String,
+          price: json['price'] is int ? json['price'] as int : null,
+          count: json['count'] is int ? json['count'] as int : null,
+          desc: json['desc'] is String ? json['desc'] as String : null,
+          dimensions: json['dimensions'] is String
+              ? json['dimensions'] as String
+              : null,
+          pickupTime: json['pickupTime'] is Timestamp
+              ? (json['pickupTime'] as Timestamp).toDate()
+              : null,
+          images: json["images"] is List
+              ? (json["images"] as List).map((e) => e as String).toList()
+              : null,
+          reservedCount:
+              json['reservedCount'] is int ? json['reservedCount'] as int : 0,
+        );
 
   Map<String, Object?> toJson() {
     return {
@@ -47,7 +52,17 @@ class Item {
       'dimensions': dimensions,
       'pickupTime': pickupTime != null ? Timestamp.fromDate(pickupTime!) : null,
       'images': images,
-      'reserved': reserved,
+      'reservedCount': reservedCount,
     };
+  }
+
+  bool fullyReserved() {
+    final count = this.count;
+    final reservedCount = this.reservedCount;
+    if (count == null) {
+      return reservedCount == null;
+    }
+    if (reservedCount == null) return false;
+    return reservedCount >= count;
   }
 }

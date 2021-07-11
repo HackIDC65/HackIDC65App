@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/item.dart';
@@ -24,61 +25,71 @@ class _ItemScreenState extends State<ItemScreen> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
 
     this.item = widget.item;
     this.sale = widget.sale;
   }
+
   @override
   Widget build(BuildContext context) {
-    return PlatformScaffold(
-      appBar: PlatformAppBar(
-        leading: Builder(
-          builder: (context) => PlatformIconButton(
-            icon: Image.asset("graphics/ic_back.png"),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ),
-        trailingActions: [
-          Container(
-            alignment: Alignment.centerRight,
-            child: PopupMenuButton(
-              itemBuilder: (BuildContext context) {
-                return {'Edit', 'Delete'}.map((String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              },
-              onSelected: (value) async {
-                if (value == 'Edit') {
-                  var res = await Navigator.of(context).push(platformPageRoute(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return EditItemScreen(item: this.item, sale: this.sale);
-                    },
-                  ));
+    return StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          return PlatformScaffold(
+            appBar: PlatformAppBar(
+              leading: Builder(
+                builder: (context) => PlatformIconButton(
+                  icon: Image.asset("graphics/ic_back.png"),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
+              trailingActions: [
+                if (snapshot.data?.uid == this.sale.userId)
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: PopupMenuButton(
+                      itemBuilder: (BuildContext context) {
+                        return {'Edit', 'Delete'}.map((String choice) {
+                          return PopupMenuItem<String>(
+                            value: choice,
+                            child: Text(choice),
+                          );
+                        }).toList();
+                      },
+                      onSelected: (value) async {
+                        if (value == 'Edit') {
+                          var res = await Navigator.of(context)
+                              .push(platformPageRoute(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return EditItemScreen(
+                                  item: this.item, sale: this.sale);
+                            },
+                          ));
 
-                  if (res != null) {
-                    setState(() {
-                      this.item = res['item'];
-                      if (res['new'] == true) {
-                        this.sale = Sale.fromJson(sale.id, {...sale.toJson(), 'itemsCount': sale.itemsCount + 1});
-                      }
-                    });
-                  }
-                }
-              },
+                          if (res != null) {
+                            setState(() {
+                              this.item = res['item'];
+                              if (res['new'] == true) {
+                                this.sale = Sale.fromJson(sale.id, {
+                                  ...sale.toJson(),
+                                  'itemsCount': sale.itemsCount + 1
+                                });
+                              }
+                            });
+                          }
+                        }
+                      },
+                    ),
+                  ),
+              ],
             ),
-          ),
-        ],
-      ),
-      backgroundColor: const Color(0xfffffbf4),
-      body: SafeArea(
-        child: ItemView(this.item, this.sale),
-      ),
-    );
+            backgroundColor: const Color(0xfffffbf4),
+            body: SafeArea(
+              child: ItemView(this.item, this.sale),
+            ),
+          );
+        });
   }
 }

@@ -23,7 +23,6 @@ class ItemsListView extends StatefulWidget {
 class _ItemsListViewState extends State<ItemsListView> {
   late String saleId;
   late Sale? sale;
-  bool first = true;
 
   @override
   void didChangeDependencies() {
